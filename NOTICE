@@ -1,0 +1,61 @@
+DeviceMocker
+Copyright 2026 x1n-Q
+
+This product includes software developed by x1n-Q.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+---
+
+THIRD-PARTY SOFTWARE
+
+This product uses the following third-party software:
+
+1. Windows Presentation Foundation (WPF)
+   - Copyright (c) Microsoft Corporation
+   - Licensed under the MIT License
+   - https://github.com/dotnet/wpf
+
+2. .NET Runtime
+   - Copyright (c) Microsoft Corporation
+   - Licensed under the MIT License
+   - https://github.com/dotnet/runtime
+
+3. System.IO.Ports
+   - Copyright (c) Microsoft Corporation
+   - Licensed under the MIT License
+   - Used for serial port communication
+
+4. System.Net.Sockets
+   - Copyright (c) Microsoft Corporation
+   - Licensed under the MIT License
+   - Used for TCP/UDP communication
+
+5. System.Net.Http
+   - Copyright (c) Microsoft Corporation
+   - Licensed under the MIT License
+   - Used for HTTP webhook functionality
+
+---
+
+ACKNOWLEDGMENTS
+
+This project was inspired by the need to test hardware-dependent applications
+without requiring physical devices. Special thanks to the .NET and WPF communities
+for providing excellent frameworks and documentation.
+
+The barcode check digit calculation algorithm is based on the GS1 standard
+specification for EAN/UPC barcodes.
+
+The scale output format (ST,GS protocol) is compatible with common industrial
+weighing scales from manufacturers including AND, Ohaus, and CAS.
