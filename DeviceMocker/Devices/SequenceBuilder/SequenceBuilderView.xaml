@@ -1,0 +1,102 @@
+<UserControl x:Class="DeviceMocker.Devices.SequenceBuilder.SequenceBuilderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MaxWidth="500"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left: Add Steps -->
+        <StackPanel Grid.Column="0" Margin="0,0,16,0">
+            <TextBlock Text="Test Sequence Builder" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+            <TextBlock Text="Build and replay action sequences" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,20"/>
+
+            <!-- Add Step -->
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+                <StackPanel>
+                    <TextBlock Text="Add Step" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,12"/>
+                    <TextBlock Text="Payload" Style="{StaticResource FieldLabelStyle}"/>
+                    <TextBox Text="{Binding NewPayload, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBoxStyle}" FontFamily="Consolas" Margin="0,0,0,12"/>
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                            <TextBlock Text="Type" Style="{StaticResource FieldLabelStyle}"/>
+                            <ComboBox ItemsSource="{Binding ActionTypeOptions}" SelectedItem="{Binding NewActionType}" Style="{StaticResource ModernComboBoxStyle}" Padding="8,7" FontSize="12"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="6,0">
+                            <TextBlock Text="Suffix" Style="{StaticResource FieldLabelStyle}"/>
+                            <ComboBox ItemsSource="{Binding SuffixOptions}" SelectedItem="{Binding NewSuffix}" Style="{StaticResource ModernComboBoxStyle}" Padding="8,7" FontSize="12"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="6,0,0,0">
+                            <TextBlock Text="Delay (ms)" Style="{StaticResource FieldLabelStyle}"/>
+                            <TextBox Text="{Binding NewDelayAfter, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBoxStyle}" Padding="8,7" FontSize="12"/>
+                        </StackPanel>
+                    </Grid>
+                    <Button Content="Add Step" Style="{StaticResource BaseButtonStyle}" Command="{Binding AddStepCommand}" HorizontalAlignment="Stretch" Padding="14,10"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Presets -->
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+                <StackPanel>
+                    <TextBlock Text="Load Preset" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,10"/>
+                    <WrapPanel>
+                        <Button Content="POS Login" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding LoadPresetCommand}" CommandParameter="POS Login" Margin="0,0,8,8" Padding="14,8" FontSize="12"/>
+                        <Button Content="Scan 3 Items" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding LoadPresetCommand}" CommandParameter="Scan 3 Items" Margin="0,0,8,8" Padding="14,8" FontSize="12"/>
+                        <Button Content="Form Fill" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding LoadPresetCommand}" CommandParameter="Form Fill" Margin="0,0,8,8" Padding="14,8" FontSize="12"/>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Run -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                <Button Content="Run Sequence" Style="{StaticResource BaseButtonStyle}" Command="{Binding RunSequenceCommand}" Margin="0,0,8,0" Padding="22,12" FontSize="13"/>
+                <Button Content="Clear All" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding ClearStepsCommand}" Margin="0,0,8,0" Padding="18,12" FontSize="13"/>
+                <Button Content="Cancel" Style="{StaticResource DangerButtonStyle}" Command="{Binding CancelCommand}" Padding="18,12" FontSize="13"/>
+            </StackPanel>
+
+            <TextBlock Text="{Binding CountdownText}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource WarningBrush}" Margin="0,4,0,0"/>
+            <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,6,0,0" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <!-- Right: Steps List -->
+        <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="16,0,0,0">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top" Text="{Binding Steps.Count, StringFormat='Sequence Steps ({0})'}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,14"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Steps}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource SurfaceBrush}" CornerRadius="6" Padding="14,10" Margin="0,0,0,6" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="32"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding Order}" FontSize="16" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}" VerticalAlignment="Center"/>
+                                        <StackPanel Grid.Column="1" Margin="4,0">
+                                            <TextBlock Text="{Binding Payload}" FontFamily="Consolas" FontSize="12" Foreground="{StaticResource TextPrimaryBrush}" TextTrimming="CharacterEllipsis"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                                <TextBlock Text="{Binding ActionType}" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,10,0"/>
+                                                <TextBlock Text="{Binding Suffix, StringFormat='Suffix: {0}'}" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,10,0"/>
+                                                <TextBlock Text="{Binding DelayAfterMs, StringFormat='Delay: {0}ms'}" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Button Grid.Column="2" Content="X" Foreground="{StaticResource ErrorBrush}" Background="Transparent" BorderThickness="0" Cursor="Hand" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"
+                                                Command="{Binding DataContext.RemoveStepCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

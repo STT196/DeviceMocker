@@ -1,0 +1,88 @@
+<UserControl x:Class="DeviceMocker.Devices.Scale.ScaleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock Text="Weighing Scale Simulator" FontSize="16" FontWeight="SemiBold"
+                   Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+        <TextBlock Text="Simulate weight readings from a digital scale" FontSize="12"
+                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,20"/>
+
+        <!-- Weight Display -->
+        <Border Style="{StaticResource CardStyle}" Padding="32" Margin="0,0,0,16">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Weight, StringFormat='{}{0:F2}'}" FontSize="56" FontWeight="Bold"
+                           FontFamily="Consolas" Foreground="{StaticResource AccentLightBrush}" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Unit}" FontSize="22" Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center" Margin="0,6,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Row 1: Weight + Unit -->
+        <Grid Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="180"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,8,0">
+                <StackPanel>
+                    <TextBlock Text="Weight Value" Style="{StaticResource FieldLabelStyle}"/>
+                    <TextBox Text="{Binding Weight, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBoxStyle}" FontSize="16" FontFamily="Consolas"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="8,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="Unit" Style="{StaticResource FieldLabelStyle}"/>
+                    <ComboBox ItemsSource="{Binding UnitOptions}" SelectedItem="{Binding Unit}" Style="{StaticResource ModernComboBoxStyle}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Row 2: Output + Format -->
+        <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,8,0">
+                <StackPanel>
+                    <TextBlock Text="Output Channel" Style="{StaticResource FieldLabelStyle}"/>
+                    <ComboBox ItemsSource="{Binding OutputOptions}" SelectedItem="{Binding SelectedOutput}" Style="{StaticResource ModernComboBoxStyle}"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="8,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="Format" Style="{StaticResource FieldLabelStyle}"/>
+                    <ComboBox ItemsSource="{Binding FormatOptions}" SelectedItem="{Binding SelectedFormat}" Style="{StaticResource ModernComboBoxStyle}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Quick Weights -->
+        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="Quick Weights" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,10"/>
+                <WrapPanel>
+                    <Button Content="0.5" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="18,10" FontSize="13" Command="{Binding PresetCommand}" CommandParameter="0.5"/>
+                    <Button Content="1.0" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="18,10" FontSize="13" Command="{Binding PresetCommand}" CommandParameter="1.0"/>
+                    <Button Content="2.5" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="18,10" FontSize="13" Command="{Binding PresetCommand}" CommandParameter="2.5"/>
+                    <Button Content="5.0" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="18,10" FontSize="13" Command="{Binding PresetCommand}" CommandParameter="5.0"/>
+                    <Button Content="10.0" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="18,10" FontSize="13" Command="{Binding PresetCommand}" CommandParameter="10.0"/>
+                    <Button Content="25.0" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="18,10" FontSize="13" Command="{Binding PresetCommand}" CommandParameter="25.0"/>
+                    <Button Content="50.0" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="18,10" FontSize="13" Command="{Binding PresetCommand}" CommandParameter="50.0"/>
+                    <Button Content="100.0" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="18,10" FontSize="13" Command="{Binding PresetCommand}" CommandParameter="100.0"/>
+                </WrapPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Actions -->
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+            <Button Content="Send Now" Style="{StaticResource BaseButtonStyle}" Command="{Binding SendWeightCommand}" Margin="0,0,8,0" Padding="24,12" FontSize="14"/>
+            <Button Content="Send After 3s" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding SendAfterCountdownCommand}" Margin="0,0,8,0" Padding="24,12" FontSize="14"/>
+            <Button Content="Random" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding RandomWeightCommand}" Margin="0,0,8,0" Padding="24,12" FontSize="14"/>
+            <Button Content="Tare" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding TareCommand}" Margin="0,0,8,0" Padding="24,12" FontSize="14"/>
+            <Button Content="Cancel" Style="{StaticResource DangerButtonStyle}" Command="{Binding CancelCommand}" Padding="20,12" FontSize="14"/>
+        </StackPanel>
+
+        <TextBlock Text="{Binding CountdownText}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource WarningBrush}" Margin="0,8,0,0"/>
+        <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,6,0,0" TextWrapping="Wrap"/>
+    </StackPanel>
+</UserControl>

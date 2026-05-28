@@ -1,0 +1,38 @@
+<UserControl x:Class="DeviceMocker.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel MaxWidth="500" HorizontalAlignment="Left">
+        <TextBlock Text="Application Settings" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,20"/>
+
+        <Border Style="{StaticResource CardStyle}">
+            <StackPanel>
+                <TextBlock Text="Default Delay Per Character (ms)" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox Text="{Binding DefaultDelay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBoxStyle}"/>
+            </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource CardStyle}">
+            <StackPanel>
+                <TextBlock Text="Default Suffix" Style="{StaticResource FieldLabelStyle}"/>
+                <ComboBox ItemsSource="{Binding SuffixOptions}" SelectedItem="{Binding DefaultSuffix}" Style="{StaticResource ModernComboBoxStyle}"/>
+            </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource CardStyle}">
+            <StackPanel>
+                <TextBlock Text="Countdown Seconds" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox Text="{Binding CountdownSeconds, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBoxStyle}"/>
+            </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource CardStyle}">
+            <StackPanel>
+                <TextBlock Text="Theme" Style="{StaticResource FieldLabelStyle}"/>
+                <ComboBox ItemsSource="{Binding ThemeOptions}" SelectedItem="{Binding Theme}" Style="{StaticResource ModernComboBoxStyle}"/>
+            </StackPanel>
+        </Border>
+
+        <Button Content="Save Settings" Style="{StaticResource BaseButtonStyle}" Command="{Binding SaveCommand}" HorizontalAlignment="Left" Margin="0,8,0,0"/>
+        <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{StaticResource SuccessBrush}" Margin="0,12,0,0"/>
+    </StackPanel>
+</UserControl>

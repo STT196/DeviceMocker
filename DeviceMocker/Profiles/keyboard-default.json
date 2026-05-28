@@ -1,0 +1,14 @@
+{
+  "id": "keyboard-default",
+  "name": "Default Virtual Keyboard",
+  "deviceType": "VirtualKeyboard",
+  "description": "Standard virtual keyboard layout",
+  "defaultOutputChannel": "Keyboard",
+  "defaultPrefix": "",
+  "defaultSuffix": "None",
+  "delayPerCharacterMs": 0,
+  "buttons": [],
+  "settings": {},
+  "createdAt": "2026-01-01T00:00:00",
+  "updatedAt": "2026-01-01T00:00:00"
+}

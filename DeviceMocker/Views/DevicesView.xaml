@@ -1,0 +1,220 @@
+<UserControl x:Class="DeviceMocker.Views.DevicesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock Text="Available Devices" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+        <TextBlock Text="Select a device to open its simulator" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,20"/>
+
+        <UniformGrid Columns="4" Margin="0,0,0,8">
+
+            <Button Margin="0,0,8,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="scanner">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="10" Padding="16,18"
+                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="140">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="SCAN" FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                <TextBlock Grid.Row="1" Text="Barcode / QR Scanner" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,8,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Simulate barcode and QR code scanning" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Margin="4,0,4,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="virtual-keyboard">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="10" Padding="16,18"
+                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="140">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="KB" FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                <TextBlock Grid.Row="1" Text="Virtual Keyboard" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,8,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Send keys, shortcuts, and function keys" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Margin="4,0,4,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="custom-panel">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="10" Padding="16,18"
+                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="140">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="BTN" FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                <TextBlock Grid.Row="1" Text="Custom Button Panel" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,8,0,0"/>
+                                <TextBlock Grid.Row="2" Text="POS-style configurable button panel" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Margin="8,0,0,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="serial-device">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="10" Padding="16,18"
+                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="140">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="COM" FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                <TextBlock Grid.Row="1" Text="Serial Text Sender" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,8,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Send text to serial COM port" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Margin="0,0,8,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="scale">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="10" Padding="16,18"
+                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="140">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="SCALE" FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                <TextBlock Grid.Row="1" Text="Weighing Scale" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,8,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Simulate weight readings from a scale" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Margin="4,0,4,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="rfid-reader">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="10" Padding="16,18"
+                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="140">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="RFID" FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                <TextBlock Grid.Row="1" Text="RFID / NFC Reader" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,8,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Simulate card taps and tag reads" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Margin="4,0,4,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="magstripe-reader">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="10" Padding="16,18"
+                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="140">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="MAG" FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                <TextBlock Grid.Row="1" Text="Magstripe Card Reader" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,8,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Simulate card swipes with track data" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Margin="8,0,0,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="sequence-builder">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="10" Padding="16,18"
+                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="140">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="SEQ" FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                <TextBlock Grid.Row="1" Text="Test Sequence Builder" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,8,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Build and replay action sequences" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </UniformGrid>
+    </StackPanel>
+</UserControl>

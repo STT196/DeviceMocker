@@ -1,0 +1,16 @@
+{
+  "id": "barcode-default",
+  "name": "Default Barcode Scanner",
+  "deviceType": "Scanner",
+  "description": "Keyboard wedge barcode scanner simulator",
+  "defaultOutputChannel": "Keyboard",
+  "defaultPrefix": "",
+  "defaultSuffix": "Enter",
+  "delayPerCharacterMs": 10,
+  "buttons": [],
+  "settings": {
+    "mode": "Barcode"
+  },
+  "createdAt": "2026-01-01T00:00:00",
+  "updatedAt": "2026-01-01T00:00:00"
+}

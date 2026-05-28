@@ -1,0 +1,59 @@
+<UserControl x:Class="DeviceMocker.Views.ProfilesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="280"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Column="0" Margin="0,0,12,0">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,16">
+                <Button Content="New Profile" Style="{StaticResource BaseButtonStyle}" Command="{Binding CreateProfileCommand}" Margin="0,0,8,0"/>
+                <Button Content="Import" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding ImportProfileCommand}" Margin="0,0,8,0"/>
+                <Button Content="Export" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding ExportProfileCommand}" Margin="0,0,8,0"/>
+                <Button Content="Duplicate" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding DuplicateProfileCommand}" Margin="0,0,8,0"/>
+                <Button Content="Delete" Style="{StaticResource DangerButtonStyle}" Command="{Binding DeleteProfileCommand}"/>
+            </StackPanel>
+            <TextBlock DockPanel.Dock="Bottom" Text="{Binding StatusMessage}" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,12,0,0"/>
+            <Border Style="{StaticResource CardStyle}">
+                <ListView ItemsSource="{Binding Profiles}" SelectedItem="{Binding SelectedProfile}" Background="Transparent" BorderThickness="0" Foreground="{StaticResource TextPrimaryBrush}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="180" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Type" Width="120" DisplayMemberBinding="{Binding DeviceType}"/>
+                            <GridViewColumn Header="Output" Width="100" DisplayMemberBinding="{Binding DefaultOutputChannel}"/>
+                            <GridViewColumn Header="Suffix" Width="70" DisplayMemberBinding="{Binding DefaultSuffix}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+        </DockPanel>
+
+        <!-- Editor Panel -->
+        <Border Grid.Column="1">
+            <Border.Style>
+                <Style TargetType="Border" BasedOn="{StaticResource CardStyle}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsEditing}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <StackPanel>
+                <TextBlock Text="Edit Profile" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,16"/>
+                <TextBlock Text="Name" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox Text="{Binding EditName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBoxStyle}" Margin="0,0,0,12"/>
+                <TextBlock Text="Description" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox Text="{Binding EditDescription, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBoxStyle}" Margin="0,0,0,12"/>
+                <TextBlock Text="Default Suffix" Style="{StaticResource FieldLabelStyle}"/>
+                <ComboBox ItemsSource="{Binding SuffixOptions}" SelectedItem="{Binding EditSuffix}" Style="{StaticResource ModernComboBoxStyle}" Margin="0,0,0,12"/>
+                <TextBlock Text="Delay Per Char (ms)" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox Text="{Binding EditDelay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBoxStyle}" Margin="0,0,0,16"/>
+                <Button Content="Save Changes" Style="{StaticResource BaseButtonStyle}" Command="{Binding SaveEditCommand}" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,78 @@
+{
+  "id": "custom-panel-default",
+  "name": "Default Custom Panel",
+  "deviceType": "CustomButtonPanel",
+  "description": "Default POS-style test buttons",
+  "defaultOutputChannel": "Keyboard",
+  "defaultPrefix": "",
+  "defaultSuffix": "None",
+  "delayPerCharacterMs": 0,
+  "buttons": [
+    {
+      "id": "cash",
+      "label": "Cash",
+      "actionType": "Key",
+      "value": "F1",
+      "prefix": "",
+      "suffix": "",
+      "delayMs": 0
+    },
+    {
+      "id": "card",
+      "label": "Card",
+      "actionType": "Key",
+      "value": "F2",
+      "prefix": "",
+      "suffix": "",
+      "delayMs": 0
+    },
+    {
+      "id": "discount",
+      "label": "Discount",
+      "actionType": "Shortcut",
+      "value": "Ctrl+D",
+      "prefix": "",
+      "suffix": "",
+      "delayMs": 0
+    },
+    {
+      "id": "void",
+      "label": "Void",
+      "actionType": "Key",
+      "value": "F4",
+      "prefix": "",
+      "suffix": "",
+      "delayMs": 0
+    },
+    {
+      "id": "search",
+      "label": "Search",
+      "actionType": "Shortcut",
+      "value": "Ctrl+F",
+      "prefix": "",
+      "suffix": "",
+      "delayMs": 0
+    },
+    {
+      "id": "submit",
+      "label": "Submit",
+      "actionType": "Key",
+      "value": "Enter",
+      "prefix": "",
+      "suffix": "",
+      "delayMs": 0
+    },
+    {
+      "id": "cancel",
+      "label": "Cancel",
+      "actionType": "Key",
+      "value": "Escape",
+      "prefix": "",
+      "suffix": "",
+      "delayMs": 0
+    }
+  ],
+  "settings": {},
+  "createdAt": "2026-01-01T00:00:00",
+  "updatedAt": "2026-01-01T00:00:00"
+}
