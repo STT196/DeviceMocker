@@ -4,6 +4,9 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <!-- Converters -->
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
             <!-- Color Palette -->
             <Color x:Key="PrimaryColor">#1E1E2E</Color>
             <Color x:Key="SecondaryColor">#2D2D44</Color>
@@ -325,6 +328,78 @@
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="Padding" Value="20"/>
                 <Setter Property="Margin" Value="0,0,0,12"/>
+            </Style>
+
+            <!-- Section Header Style -->
+            <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="11"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+                <Setter Property="Margin" Value="0,0,0,10"/>
+            </Style>
+
+            <!-- Modern CheckBox Style -->
+            <Style x:Key="ModernCheckBoxStyle" TargetType="CheckBox">
+                <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="CheckBox">
+                            <StackPanel Orientation="Horizontal">
+                                <Border x:Name="box" Width="18" Height="18" CornerRadius="4"
+                                        Background="{StaticResource SurfaceBrush}"
+                                        BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                                        VerticalAlignment="Center">
+                                    <TextBlock x:Name="check" Text="✓" FontSize="12" FontWeight="Bold"
+                                               Foreground="White" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" Visibility="Collapsed"/>
+                                </Border>
+                                <ContentPresenter Margin="10,0,0,0" VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True"/>
+                            </StackPanel>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="box" Property="Background" Value="{StaticResource AccentBrush}"/>
+                                    <Setter TargetName="box" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                    <Setter TargetName="check" Property="Visibility" Value="Visible"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="box" Property="BorderBrush" Value="{StaticResource AccentLightBrush}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- ListViewItem Row Style -->
+            <Style x:Key="ModernListViewItemStyle" TargetType="ListViewItem">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                <Setter Property="Padding" Value="8,6"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListViewItem">
+                            <Border x:Name="row" Background="{TemplateBinding Background}"
+                                    Padding="{TemplateBinding Padding}" CornerRadius="4">
+                                <GridViewRowPresenter Content="{TemplateBinding Content}"
+                                                      Columns="{TemplateBinding GridView.ColumnCollection}"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="row" Property="Background" Value="{StaticResource SurfaceBrush}"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="row" Property="Background" Value="{StaticResource AccentBrush}"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

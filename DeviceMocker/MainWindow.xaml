@@ -50,7 +50,7 @@
                     <TextBlock Text="Hardware Simulator" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0"/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="0,0,0,14">
-                    <TextBlock Text="v1.0.0" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="v1.0.1" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center"/>
                     <TextBlock FontSize="10" HorizontalAlignment="Center" Margin="0,4,0,0">
                         <Run Text="by " Foreground="{StaticResource TextSecondaryBrush}"/>
                         <Run Text="x1n-Q" Foreground="{StaticResource AccentLightBrush}" FontWeight="SemiBold"/>

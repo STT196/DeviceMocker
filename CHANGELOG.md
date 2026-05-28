@@ -5,6 +5,27 @@ All notable changes to DeviceMocker will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-05-29
+
+### Fixed
+- **Profiles screen**: Editor panel no longer overlaps the list; added proper spacing and minimum width.
+- **Profiles screen**: Toolbar buttons now wrap correctly on narrow window widths.
+- **Settings screen**: Theme switching now applies instantly to all controls (previously required app restart).
+- **Profiles editor**: Numeric-only validation on the "Delay per Character" field prevents silent binding failures.
+- **Settings**: `DefaultOutputChannel`, `LogToFile`, and `MaxLogEntries` were defined in the model but missing from the UI — now exposed.
+
+### Added
+- **Profiles**: Live search box filters by name, device type, or description.
+- **Profiles**: Empty-state placeholder when no profile is selected ("No profile selected").
+- **Profiles editor**: New fields — Device Type, Default Output Channel, Prefix.
+- **Profiles editor**: Cancel button to discard unsaved edits.
+- **Profiles**: ListView rows now have hover/selection styling for better feedback.
+- **Profiles & Settings**: Status messages are color-coded (green = success, red = error) and auto-clear after 3 seconds (Settings).
+- **Settings**: Reorganized into grouped sections — *Output Defaults*, *Behavior*, *Appearance*.
+- **Settings**: "Reset to Defaults" button to restore factory settings.
+- **Settings**: Toggle for "Persist logs to file" with helpful description.
+- **App**: New reusable styles — `ModernCheckBoxStyle`, `ModernListViewItemStyle`, `SectionHeaderStyle`.
+
 ## [1.0.0] - 2026-05-28
 
 ### Added
@@ -93,4 +114,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### License
 - Apache License 2.0
 
+[1.0.1]: https://github.com/x1n-Q/DeviceMocker/releases/tag/v1.0.1
 [1.0.0]: https://github.com/x1n-Q/DeviceMocker/releases/tag/v1.0.0
