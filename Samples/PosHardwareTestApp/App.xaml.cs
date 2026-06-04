@@ -1,21 +1,18 @@
 using System;
 using System.IO;
 using System.Windows;
-using DeviceMocker.Core;
 
-namespace DeviceMocker
+namespace PosHardwareTestApp
 {
     public partial class App : Application
     {
-        private static readonly string StartupTraceFile = Path.Combine(Path.GetTempPath(), "DeviceMocker-startup.log");
+        private static readonly string StartupTraceFile = Path.Combine(Path.GetTempPath(), "PosHardwareTestApp-startup.log");
 
         protected override void OnStartup(StartupEventArgs e)
         {
             Trace("OnStartup:begin");
             try
             {
-                ServiceLocator.Initialize();
-                Trace("OnStartup:services-initialized");
                 base.OnStartup(e);
                 Trace("OnStartup:base-complete");
                 MainWindow = new MainWindow();
@@ -28,13 +25,6 @@ namespace DeviceMocker
                 Trace($"OnStartup:exception {ex}");
                 throw;
             }
-        }
-
-        protected override void OnExit(ExitEventArgs e)
-        {
-            Trace("OnExit");
-            ServiceLocator.Shutdown();
-            base.OnExit(e);
         }
 
         private static void Trace(string message)

@@ -1,0 +1,116 @@
+<UserControl x:Class="DeviceMocker.Devices.CashDrawer.CashDrawerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MaxWidth="540"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="0,0,16,0">
+            <TextBlock Text="Cash Drawer Simulator" FontSize="16" FontWeight="SemiBold"
+                       Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+            <TextBlock Text="Trigger open-drawer commands and track simulated drawer state"
+                       FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,16"/>
+
+            <Border Style="{StaticResource CardStyle}" Padding="28" Margin="0,0,0,16">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock Text="DRAWER STATE" FontSize="11" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center"/>
+                    <Border CornerRadius="20" Padding="18,10" Margin="0,14,0,0">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="{StaticResource ErrorBrush}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding DrawerState}" Value="Open">
+                                        <Setter Property="Background" Value="{StaticResource SuccessBrush}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <TextBlock Text="{Binding DrawerState}" FontSize="28" FontWeight="Bold"
+                                   Foreground="{StaticResource TextPrimaryBrush}" HorizontalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="{Binding DrawerStateDescription}" FontSize="12"
+                               Foreground="{StaticResource TextSecondaryBrush}" Margin="0,12,0,0"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,0,8">
+                <StackPanel>
+                    <TextBlock Text="Output Channel" Style="{StaticResource FieldLabelStyle}"/>
+                    <ComboBox ItemsSource="{Binding OutputOptions}" SelectedItem="{Binding SelectedOutput}"
+                              Style="{StaticResource ModernComboBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="Quick Commands" FontSize="13" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,10"/>
+                    <WrapPanel>
+                        <Button Content="OPEN_DRAWER" Style="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding QuickCommandCommand}" CommandParameter="OPEN_DRAWER"
+                                Margin="0,0,8,8" Padding="16,10" FontSize="12"/>
+                        <Button Content="NO_SALE" Style="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding QuickCommandCommand}" CommandParameter="NO_SALE"
+                                Margin="0,0,8,8" Padding="16,10" FontSize="12"/>
+                        <Button Content="STATUS" Style="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding QuickCommandCommand}" CommandParameter="STATUS"
+                                Margin="0,0,8,8" Padding="16,10" FontSize="12"/>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                <Button Content="Open Drawer" Style="{StaticResource BaseButtonStyle}" Command="{Binding OpenDrawerCommand}"
+                        Margin="0,0,8,0" Padding="22,12" FontSize="13"/>
+                <Button Content="Send After 3s" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding SendAfterCountdownCommand}"
+                        Margin="0,0,8,0" Padding="22,12" FontSize="13"/>
+                <Button Content="Send Status" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding SendStatusCommand}"
+                        Margin="0,0,8,0" Padding="22,12" FontSize="13"/>
+                <Button Content="Mark Closed" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding MarkClosedCommand}"
+                        Margin="0,0,8,0" Padding="18,12" FontSize="13"/>
+                <Button Content="Cancel" Style="{StaticResource DangerButtonStyle}" Command="{Binding CancelCommand}"
+                        Padding="18,12" FontSize="13"/>
+            </StackPanel>
+
+            <TextBlock Text="{Binding CountdownText}" FontSize="20" FontWeight="Bold"
+                       Foreground="{StaticResource WarningBrush}" Margin="0,8,0,0"/>
+            <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}"
+                       Margin="0,8,0,0" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="16,0,0,0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Margin="0,0,0,12">
+                    <TextBlock Text="Local History" FontSize="13" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                    <TextBlock Text="Newest events first. Mark Closed stays local and does not send output."
+                               FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,12,0,0">
+                    <Button Content="Clear History" Style="{StaticResource SecondaryButtonStyle}"
+                            Command="{Binding ClearHistoryCommand}" Padding="14,8" FontSize="12"/>
+                </StackPanel>
+
+                <Border Background="{StaticResource SurfaceBrush}" CornerRadius="8" Padding="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding History}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource PrimaryBrush}" CornerRadius="6" Padding="10,8" Margin="0,0,0,6">
+                                        <TextBlock Text="{Binding}" FontFamily="Consolas" FontSize="11"
+                                                   Foreground="{StaticResource TextPrimaryBrush}" TextWrapping="Wrap"/>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Border>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

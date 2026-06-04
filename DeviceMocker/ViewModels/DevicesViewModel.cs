@@ -1,3 +1,4 @@
+using DeviceMocker.Devices.CashDrawer;
 using System.Windows.Input;
 using DeviceMocker.Devices.MagstripeReader;
 using DeviceMocker.Devices.PosPanel;
@@ -51,6 +52,9 @@ namespace DeviceMocker.ViewModels
                     break;
                 case "sequence-builder":
                     _mainVm.NavigateToDevice(new SequenceBuilderViewModel(), "Test Sequence Builder");
+                    break;
+                case "cash-drawer":
+                    _mainVm.NavigateToDevice(new CashDrawerViewModel(), "Cash Drawer");
                     break;
             }
         }

@@ -14,8 +14,8 @@ namespace DeviceMocker.Core
         public static readonly string LogsFolder = Path.Combine(AppDataFolder, "Logs");
 
         public const string AppName = "DeviceMocker";
-        public const string AppVersion = "1.0.0";
-        public const string AppDescription = "Hardware Input Device Simulator for Developers";
+        public const string AppVersion = "1.1.0";
+        public const string AppDescription = "Windows toolkit for simulating device input and emulating POS printer and cash drawer workflows.";
         public const string AppAuthor = "x1n-Q";
         public const string AppGitHub = "https://github.com/x1n-Q/DeviceMocker";
 

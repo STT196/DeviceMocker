@@ -23,7 +23,7 @@ namespace DeviceMocker.Services
                 Directory.CreateDirectory(directory);
 
             var json = JsonSerializer.Serialize(data, Options);
-            await File.WriteAllTextAsync(path, json);
+            await File.WriteAllTextAsync(path, json).ConfigureAwait(false);
         }
 
         public async Task<T?> LoadAsync<T>(string path)
@@ -31,7 +31,7 @@ namespace DeviceMocker.Services
             if (!File.Exists(path))
                 return default;
 
-            var json = await File.ReadAllTextAsync(path);
+            var json = await File.ReadAllTextAsync(path).ConfigureAwait(false);
             return JsonSerializer.Deserialize<T>(json, Options);
         }
     }

@@ -84,6 +84,7 @@ namespace DeviceMocker.Core
                     DelayMs = b.DelayMs
                 }).ToList(),
                 Settings = new Dictionary<string, string>(original.Settings),
+                EmulatorSettings = original.EmulatorSettings?.Clone() ?? new EmulatorProfileSettings(),
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
             };

@@ -1,3 +1,4 @@
+using DeviceMocker.Devices.CashDrawer;
 using DeviceMocker.Devices.MagstripeReader;
 using DeviceMocker.Devices.PosPanel;
 using DeviceMocker.Devices.RfidReader;
@@ -18,6 +19,8 @@ namespace DeviceMocker.Core
         public static IStorageService Storage { get; private set; } = null!;
         public static SettingsService Settings { get; private set; } = null!;
         public static ProfileManager ProfileManager { get; private set; } = null!;
+        public static CashDrawerEmulator CashDrawerEmulator { get; private set; } = null!;
+        public static EmulatorHostService EmulatorHost { get; private set; } = null!;
 
         // Output Channels
         public static KeyboardOutputService KeyboardOutput { get; private set; } = null!;
@@ -38,6 +41,7 @@ namespace DeviceMocker.Core
         public static RfidReaderDevice RfidReaderDevice { get; private set; } = null!;
         public static MagstripeReaderDevice MagstripeReaderDevice { get; private set; } = null!;
         public static SequenceBuilderDevice SequenceBuilderDevice { get; private set; } = null!;
+        public static CashDrawerDevice CashDrawerDevice { get; private set; } = null!;
 
         public static void Initialize()
         {
@@ -48,6 +52,9 @@ namespace DeviceMocker.Core
             Storage = new JsonStorageService();
             Settings = new SettingsService(Storage);
             ProfileManager = new ProfileManager(Storage, AppConstants.ProfilesFolder);
+            Settings.LoadAsync().GetAwaiter().GetResult();
+            CashDrawerEmulator = new CashDrawerEmulator();
+            EmulatorHost = new EmulatorHostService(Settings, ProfileManager, CashDrawerEmulator);
 
             // Output channels
             KeyboardOutput = new KeyboardOutputService();
@@ -75,6 +82,7 @@ namespace DeviceMocker.Core
             RfidReaderDevice = new RfidReaderDevice(Router);
             MagstripeReaderDevice = new MagstripeReaderDevice(Router);
             SequenceBuilderDevice = new SequenceBuilderDevice(Router);
+            CashDrawerDevice = new CashDrawerDevice(Router);
 
             DeviceManager = new DeviceManager();
             DeviceManager.Register(ScannerDevice);
@@ -85,6 +93,13 @@ namespace DeviceMocker.Core
             DeviceManager.Register(RfidReaderDevice);
             DeviceManager.Register(MagstripeReaderDevice);
             DeviceManager.Register(SequenceBuilderDevice);
+            DeviceManager.Register(CashDrawerDevice);
+        }
+
+        public static void Shutdown()
+        {
+            EmulatorHost.StopAsync().GetAwaiter().GetResult();
+            SerialOutput.Dispose();
         }
     }
 }

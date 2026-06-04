@@ -15,6 +15,7 @@ namespace DeviceMocker.Models
         public int DelayPerCharacterMs { get; set; } = 10;
         public List<PosButton> Buttons { get; set; } = new();
         public Dictionary<string, string> Settings { get; set; } = new();
+        public EmulatorProfileSettings EmulatorSettings { get; set; } = new();
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }

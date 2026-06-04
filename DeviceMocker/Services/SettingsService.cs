@@ -17,11 +17,11 @@ namespace DeviceMocker.Services
 
         public async Task<AppSettings> LoadAsync()
         {
-            _cachedSettings = await _storage.LoadAsync<AppSettings>(AppConstants.SettingsFile);
+            _cachedSettings = await _storage.LoadAsync<AppSettings>(AppConstants.SettingsFile).ConfigureAwait(false);
             if (_cachedSettings == null)
             {
                 _cachedSettings = new AppSettings();
-                await SaveAsync(_cachedSettings);
+                await SaveAsync(_cachedSettings).ConfigureAwait(false);
             }
             return _cachedSettings;
         }
@@ -29,7 +29,7 @@ namespace DeviceMocker.Services
         public async Task SaveAsync(AppSettings settings)
         {
             _cachedSettings = settings;
-            await _storage.SaveAsync(AppConstants.SettingsFile, settings);
+            await _storage.SaveAsync(AppConstants.SettingsFile, settings).ConfigureAwait(false);
         }
 
         public AppSettings Current => _cachedSettings ?? new AppSettings();

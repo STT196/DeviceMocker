@@ -22,6 +22,7 @@ namespace DeviceMocker.ViewModels
 
         public DashboardViewModel DashboardVm { get; }
         public DevicesViewModel DevicesVm { get; }
+        public EmulatorsViewModel EmulatorsVm { get; }
         public ProfilesViewModel ProfilesVm { get; }
         public LogsViewModel LogsVm { get; }
         public SettingsViewModel SettingsVm { get; }
@@ -36,6 +37,7 @@ namespace DeviceMocker.ViewModels
         {
             DashboardVm = new DashboardViewModel(this);
             DevicesVm = new DevicesViewModel(this);
+            EmulatorsVm = new EmulatorsViewModel();
             ProfilesVm = new ProfilesViewModel();
             LogsVm = new LogsViewModel();
             SettingsVm = new SettingsViewModel();
@@ -67,6 +69,11 @@ namespace DeviceMocker.ViewModels
                     CurrentPage = ProfilesVm;
                     CurrentPageTitle = "Profiles";
                     ProfilesVm.LoadProfilesCommand.Execute(null);
+                    break;
+                case "Emulators":
+                    CurrentPage = EmulatorsVm;
+                    CurrentPageTitle = "Emulators";
+                    EmulatorsVm.RefreshProfilesCommand.Execute(null);
                     break;
                 case "Logs":
                     CurrentPage = LogsVm;

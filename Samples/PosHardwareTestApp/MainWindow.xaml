@@ -1,0 +1,199 @@
+<Window x:Class="PosHardwareTestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DeviceMocker POS Hardware Test App"
+        Width="1220"
+        Height="780"
+        MinWidth="1020"
+        MinHeight="680"
+        Background="{StaticResource BgBrush}"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="24">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="390"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Column: Input Settings -->
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" Padding="0,0,4,0">
+            <StackPanel>
+                <!-- Title Panel -->
+                <StackPanel Margin="0,0,0,20">
+                    <TextBlock Text="🔌 POS Hardware Test App"
+                               Foreground="{StaticResource TextBrush}"
+                               FontSize="24"
+                               FontWeight="Bold"/>
+                    <TextBlock Text="Send ESC/POS commands to DeviceMocker's active emulator host."
+                               Foreground="{StaticResource MutedBrush}"
+                               FontSize="12"
+                               Margin="0,6,0,0"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <!-- Transport Settings -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="TRANSPORT SETTINGS" Foreground="{StaticResource AccentAltBrush}" FontWeight="Bold" FontSize="11" Margin="0,0,0,14"/>
+
+                        <TextBlock Text="Communication Mode" Style="{StaticResource LabelStyle}"/>
+                        <ComboBox x:Name="TransportModeComboBox" SelectedIndex="0" SelectionChanged="TransportModeComboBox_SelectionChanged" Style="{StaticResource ComboBoxStyle}" Margin="0,0,0,12">
+                            <ComboBoxItem Content="TCP"/>
+                            <ComboBoxItem Content="Serial"/>
+                        </ComboBox>
+
+                        <!-- TCP Binding Panel -->
+                        <StackPanel x:Name="TcpPanel">
+                            <TextBlock Text="Target Host Address" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="HostTextBox" Text="127.0.0.1" Style="{StaticResource TextBoxStyle}" Margin="0,0,0,12"/>
+                            <TextBlock Text="Port Number" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="PortTextBox" Text="9100" Style="{StaticResource TextBoxStyle}" Margin="0,0,0,4"/>
+                        </StackPanel>
+
+                        <!-- Serial COM Panel -->
+                        <StackPanel x:Name="SerialPanel" Visibility="Collapsed">
+                            <TextBlock Text="COM Port" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox x:Name="SerialPortComboBox" Style="{StaticResource ComboBoxStyle}" Margin="0,0,0,12"/>
+                            <TextBlock Text="Baud Rate" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="BaudRateTextBox" Text="9600" Style="{StaticResource TextBoxStyle}" Margin="0,0,0,12"/>
+                            <Button Content="Refresh Available Ports" Click="RefreshPortsButton_Click" Style="{StaticResource SecondaryButtonStyle}" HorizontalAlignment="Left" Padding="12,8" FontSize="12"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Receipt details template -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="RECEIPT BUILDER TEMPLATE" Foreground="{StaticResource AccentAltBrush}" FontWeight="Bold" FontSize="11" Margin="0,0,0,14"/>
+
+                        <TextBlock Text="Store Name Header" Style="{StaticResource LabelStyle}"/>
+                        <TextBox x:Name="StoreNameTextBox" Text="DeviceMocker Test Store" Style="{StaticResource TextBoxStyle}" Margin="0,0,0,12"/>
+
+                        <TextBlock Text="Receipt Body Items" Style="{StaticResource LabelStyle}"/>
+                        <TextBox x:Name="ReceiptBodyTextBox"
+                                 Text="1 x Coffee           4.50&#x0a;1 x Sandwich         6.90&#x0a;------------------------&#x0a;TOTAL               11.40"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 AcceptsReturn="True"
+                                 Height="120"
+                                 FontFamily="Consolas"
+                                 TextWrapping="NoWrap"
+                                 VerticalScrollBarVisibility="Auto"
+                                 Margin="0,0,0,12"/>
+
+                        <TextBlock Text="Footer Text Message" Style="{StaticResource LabelStyle}"/>
+                        <TextBox x:Name="FooterTextBox" Text="Thank you for testing DeviceMocker!" Style="{StaticResource TextBoxStyle}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Raw ESC/POS commands -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="RAW ESC/POS HEX BYTES" Foreground="{StaticResource AccentAltBrush}" FontWeight="Bold" FontSize="11" Margin="0,0,0,14"/>
+                        <TextBlock Text="Hex Byte Stream" Style="{StaticResource LabelStyle}"/>
+                        <TextBox x:Name="RawHexTextBox"
+                                 Text="1B 40 1B 61 01 44 45 56 49 43 45 4D 4F 43 4B 45 52 0A 1B 61 00 54 65 73 74 20 44 72 61 77 65 72 0A 1B 70 00 19 FA"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 AcceptsReturn="True"
+                                 Height="80"
+                                 FontFamily="Consolas"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Right Column: Actions and Logs Console -->
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Action buttons -->
+            <Border Grid.Row="0" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="TESTING ACTION DASHBOARD"
+                               Foreground="{StaticResource AccentAltBrush}"
+                               FontWeight="Bold"
+                               FontSize="11"
+                               Margin="0,0,0,14"/>
+                    <WrapPanel>
+                        <Button Content="Print Receipt Only" Click="PrintReceiptButton_Click" Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,8,8" Padding="18,10"/>
+                        <Button Content="Trigger Open Drawer" Click="OpenDrawerButton_Click" Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,8,8" Padding="18,10"/>
+                        <Button Content="Print + Kick Drawer" Click="PrintAndOpenDrawerButton_Click" Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,8,8" Padding="18,10"/>
+                        <Button Content="Reset Drawer State" Click="ResetDrawerStateButton_Click" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="16,10"/>
+                        <Button Content="Send Paper Cut" Click="CutPaperButton_Click" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="16,10"/>
+                        <Button Content="Send Raw Hex Stream" Click="SendRawHexButton_Click" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="16,10"/>
+                        <Button Content="Sample No Sale Trigger" Click="SampleNoSaleButton_Click" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="16,10"/>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Last Payload representation -->
+            <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="LAST HEX STREAM PAYLOAD TRANSMITTED"
+                               Foreground="{StaticResource AccentAltBrush}"
+                               FontWeight="Bold"
+                               FontSize="11"
+                               Margin="0,0,0,8"/>
+                    
+                    <!-- Status message text block -->
+                    <TextBlock x:Name="StatusTextBlock"
+                               DockPanel.Dock="Bottom"
+                               Foreground="{StaticResource SuccessBrush}"
+                               FontSize="12.5"
+                               FontWeight="SemiBold"
+                               Margin="0,10,0,0"
+                               Text="Ready."/>
+                    
+                    <TextBox x:Name="LastPayloadTextBox"
+                             Style="{StaticResource TextBoxStyle}"
+                             AcceptsReturn="True"
+                             IsReadOnly="True"
+                             FontFamily="Consolas"
+                             FontSize="12"
+                             Foreground="{StaticResource AccentAltBrush}"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"/>
+                </DockPanel>
+            </Border>
+
+            <!-- Activity Log Console -->
+            <Border Grid.Row="4" Style="{StaticResource CardStyle}">
+                <DockPanel>
+                    <Grid DockPanel.Dock="Top" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="DEVELOPER TERMINAL ACTIVITY LOG"
+                                   Foreground="{StaticResource AccentAltBrush}"
+                                   FontWeight="Bold"
+                                   FontSize="11"
+                                   VerticalAlignment="Center"/>
+                        <Button Grid.Column="1" Content="Clear Output Console" Click="ClearLogButton_Click" Style="{StaticResource SecondaryButtonStyle}" Padding="10,6" FontSize="11" VerticalAlignment="Center"/>
+                    </Grid>
+                    
+                    <!-- Console styling for logs -->
+                    <Border Background="#0C0C14" CornerRadius="6" Padding="12" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                        <TextBox x:Name="ActivityLogTextBox"
+                                 Background="Transparent"
+                                 Foreground="#A7F3D0"
+                                 BorderThickness="0"
+                                 AcceptsReturn="True"
+                                 IsReadOnly="True"
+                                 FontFamily="Consolas"
+                                 FontSize="12"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"/>
+                    </Border>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

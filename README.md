@@ -1,244 +1,188 @@
 # DeviceMocker
 
-**Hardware Input Device Simulator for Developers**
+Windows desktop tooling for developers who need to test hardware-dependent software without relying on physical devices.
 
-A Windows desktop tool that simulates hardware input devices — barcode scanners, RFID readers, weighing scales, card readers, serial devices, and more — so developers can test their software without buying or connecting real hardware.
+DeviceMocker combines two workflows:
+
+- `Simulation mode`: send realistic device input into a target app through keyboard, serial, TCP, UDP, or HTTP.
+- `Emulator mode`: listen for supported device traffic and behave like a development-time POS endpoint.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![.NET](https://img.shields.io/badge/.NET-8.0-purple.svg)](https://dotnet.microsoft.com/)
+[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4.svg)](https://dotnet.microsoft.com/)
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D6.svg)]()
 
----
+## What This Project Is For
 
-## Why DeviceMocker?
+DeviceMocker is built for:
 
-If you're building POS software, inventory systems, access control, kiosk apps, or any application that depends on external hardware — you know the pain:
+- POS software development
+- internal line-of-business applications
+- inventory and warehouse systems
+- kiosk and self-service flows
+- access-control and card-based workflows
+- teams that need repeatable hardware testing before real devices are available
 
-- **No scanner?** Can't test barcode input.
-- **No scale?** Can't test weight readings.
-- **No RFID reader?** Can't test card taps.
-- **No serial device?** Can't test COM port communication.
+The goal is practical development support: help teams simulate or emulate the hardware behavior their software expects, with a workflow that is easy to run on a Windows developer machine.
 
-**DeviceMocker solves this.** It simulates all these devices and sends data to your application exactly like real hardware would.
+## Included Applications
 
----
+This repository ships two Windows desktop apps:
 
-## Features
+### `DeviceMocker`
 
-### 8 Device Simulators
+The main application for device simulation and POS-oriented emulator hosting.
 
-| Device | What it does |
-|--------|-------------|
-| **Barcode / QR Scanner** | Sends barcodes via keyboard wedge. 20 sample barcodes, random generator, batch scan mode. |
-| **Virtual Keyboard** | Sends individual keys, shortcuts (Ctrl+C, etc.), function keys F1-F12, arrow keys. |
-| **Custom Button Panel** | POS-style configurable buttons. Cash, Card, Discount, Submit, etc. |
-| **Serial Text Sender** | Sends text to COM ports. Built-in simulation mode with 5 virtual devices. |
-| **Weighing Scale** | Sends weight values in standard scale formats (ST,GS protocol). kg/lb/g/oz. |
-| **RFID / NFC Reader** | Sends card UIDs. 8 sample cards, hex/decimal formats, random UID generator. |
-| **Magstripe Card Reader** | Sends track 1/2/3 data. Visa, MasterCard, Amex test cards included. |
-| **Test Sequence Builder** | Build and replay multi-step action sequences. 3 presets included. |
+Current highlights:
 
-### 5 Output Channels
+- 9 built-in device simulators
+- 5 output channels
+- saved profiles and reusable settings
+- action logging and export
+- countdown-based sends for focus switching
+- ESC/POS receipt-printer emulator host
+- printer-driven cash drawer state tracking
 
-| Channel | Description |
-|---------|-------------|
-| **Keyboard Wedge** | Types into the active window using Windows SendInput API |
-| **Serial (COM Port)** | Sends data to a physical or virtual COM port |
-| **TCP Client** | Sends data to a TCP server |
-| **UDP** | Sends UDP datagrams |
-| **HTTP Webhook** | POSTs JSON payload to any URL |
+### `POS Hardware Test App`
 
-### Additional Features
+A companion test client for exercising the DeviceMocker emulator host during development.
 
-- **Profile Management** — Save, load, import/export device profiles as JSON
-- **Activity Logs** — Every action logged with timestamp, device, channel, payload, status
-- **Log Export** — Export logs to CSV or JSON
-- **Dark / Light Theme** — Toggle from Settings
-- **Send After Countdown** — 3-second delay so you can switch to your target app
-- **Batch Scan Mode** — Fire multiple barcodes automatically with configurable interval
+Current highlights:
 
----
+- send ESC/POS receipt content over TCP or serial
+- trigger drawer-kick commands
+- send cut-paper commands
+- send raw hex payloads
+- reset drawer state for test workflows
+
+## Current Capability Summary
+
+### Device Simulation
+
+Available device modules:
+
+| Device | Purpose |
+| --- | --- |
+| Barcode / QR Scanner | Keyboard-style scan input with samples, random values, and batch sending |
+| Virtual Keyboard | Text, keys, shortcuts, and navigation testing |
+| POS Button Panel | Configurable point-of-sale style button actions |
+| Serial Text Sender | COM-port payload testing with direct and simulated workflows |
+| Weighing Scale | Weight strings in scale-friendly formats |
+| RFID / NFC Reader | UID-based tap simulation |
+| Magstripe Reader | Track 1/2/3 swipe testing |
+| Test Sequence Builder | Repeatable multi-step input flows |
+| Cash Drawer | Text-command-based open/status simulation |
+
+Available output channels:
+
+| Channel | Purpose |
+| --- | --- |
+| Keyboard Wedge | Sends focused input through Windows keyboard events |
+| Serial | Sends payloads to a COM port |
+| TCP Client | Sends payloads to a TCP endpoint |
+| UDP | Sends payloads as datagrams |
+| HTTP Webhook | Sends JSON payloads to an HTTP endpoint |
+
+### POS Emulator Host
+
+The current emulator host is intentionally focused.
+
+Supported development target today:
+
+- ESC/POS receipt-printer traffic
+- printer-driven cash drawer behavior
+- TCP listener workflows
+- serial listener workflows
+- raw-byte logging
+- parsed event logging
+- receipt preview rendering for supported text commands
+
+Phase-1 emulator support is aimed at real development and integration testing, especially for POS teams using ESC/POS-compatible printing flows.
 
 ## Quick Start
 
-### Prerequisites
+### Requirements
 
-- **Windows 10/11**
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- Visual Studio 2022 (optional, for development)
+- Windows 10 or Windows 11
+- .NET 8 SDK for source builds
 
-### Build & Run
+### Run From Source
 
-```bash
+```powershell
 git clone https://github.com/x1n-Q/DeviceMocker.git
-cd DeviceMocker/DeviceMocker
-dotnet run
+cd DeviceMocker
+dotnet run --project DeviceMocker/DeviceMocker.csproj
 ```
 
-### Your First Test (Scanner → Notepad)
+### First Simulation Test
 
-1. Open **Notepad**
-2. Open **DeviceMocker** → **Devices** → **Barcode / QR Scanner**
-3. Click **"Coca-Cola 330ml"** from the sample barcodes on the right
-4. You get **3 seconds** — click inside Notepad
-5. Notepad receives `5449000000996` + Enter — **exactly like a real scanner**
+1. Open Notepad.
+2. Open `DeviceMocker`.
+3. Go to `Devices -> Barcode / QR Scanner`.
+4. Click a sample barcode.
+5. Switch focus to Notepad during the countdown.
+6. The barcode is typed into Notepad like scanner input.
 
----
+## Emulator Workflow
 
-## How It Works
+To test the current ESC/POS emulator:
 
+1. Open `DeviceMocker`.
+2. Go to `Emulators`.
+3. Set:
+   - `Device Type = ReceiptPrinter`
+   - `Emulation Protocol = EscPos`
+   - `Drawer Kick Link Mode = PrinterDriven`
+   - `Transport Binding = Tcp`
+   - `TCP Binding IP = 127.0.0.1`
+   - `TCP Listening Port = 9100`
+4. Click `Start Host`.
+5. Run the companion app:
+
+```powershell
+dotnet run --project Samples/PosHardwareTestApp/PosHardwareTestApp.csproj
 ```
-Device Module  →  Input Router  →  Output Channel  →  Target Application
-```
 
-**Example:**
-```
-Barcode Scanner Simulator
-  → creates DeviceAction (payload: "4801234567890", suffix: "Enter")
-  → InputRouter routes to KeyboardOutputService
-  → SendInput API types the barcode into the active window
-  → Your POS app receives it as if a real scanner was plugged in
-```
+6. In the test app, click `Print + Kick Drawer`.
+7. DeviceMocker should show receipt output and set the drawer state to open.
 
-The architecture separates devices from output channels, so the same barcode data can be sent via keyboard, serial, TCP, UDP, or HTTP.
+## Repository Layout
 
----
-
-## Device Guides
-
-### Barcode / QR Scanner
-
-Best for: POS systems, inventory apps, warehouse software.
-
-1. Go to **Devices → Barcode / QR Scanner**
-2. **Click a sample barcode** from the right panel, or type your own
-3. Select suffix: **Enter** (most common for scanners), **Tab**, or **None**
-4. Click **Send After 3s** → switch to your app
-5. The barcode types into your app's focused input field
-
-**Batch Mode:** Enable batch scan, set count and interval, click Start — fires multiple random barcodes automatically.
-
-### Weighing Scale
-
-Best for: Inventory software, shipping apps, food service systems.
-
-1. Go to **Devices → Weighing Scale**
-2. Set weight value, unit (kg/lb/g/oz), and format
-3. **Standard format:** `ST,GS,+     5.00  kg` (matches AND, Ohaus, CAS scales)
-4. **Raw Number:** `5.00` (for apps that parse just the number)
-5. Click **Send After 3s** → switch to your app's weight field
-
-### RFID / NFC Reader
-
-Best for: Access control, attendance systems, membership apps.
-
-1. Go to **Devices → RFID / NFC Reader**
-2. Click a sample card or generate a random UID
-3. Choose format: hex uppercase, lowercase, decimal, with colons, with spaces
-4. Click **Tap After 3s** → switch to your app
-
-### Serial Text Sender
-
-Best for: Testing COM port communication without hardware.
-
-**Simulation Mode (no hardware needed):**
-1. Go to **Devices → Serial Text Sender** — Simulation Mode is ON by default
-2. Select a virtual device (Echo, Weighing Scale, Barcode Scanner, Temperature Sensor, Access Control)
-3. Click quick commands (READ, STATUS, WEIGHT) or type your own
-4. Watch the terminal show TX → RX with hex bytes
-
-**Hardware Mode:**
-1. Uncheck Simulation Mode
-2. Select COM port, baud rate, line ending
-3. Click Connect → type payload → Send
-
-### Test Sequence Builder
-
-Best for: Automated testing, form filling, login sequences.
-
-1. Go to **Devices → Test Sequence Builder**
-2. Load a preset: **POS Login**, **Scan 3 Items**, or **Form Fill**
-3. Or build your own: add steps with payload, type (Text/Key/Shortcut), suffix, and delay
-4. Click **Run Sequence** → switch to your app
-5. All steps execute in order with configured delays
-
----
-
-## Project Structure
-
-```
+```text
 DeviceMocker/
-├── Core/              — ServiceLocator, InputRouter, OutputChannelManager, DeviceManager
-├── Models/            — DeviceAction, DeviceProfile, DeviceLog, OutputResult, enums
-├── Interfaces/        — IDeviceModule, IOutputChannel, ILoggerService, IStorageService
-├── Services/          — KeyboardOutput, SerialOutput, TCP, UDP, HTTP, Logger, Settings
-├── Devices/
-│   ├── Scanner/       — Barcode/QR scanner simulator
-│   ├── VirtualKeyboard/
-│   ├── PosPanel/      — Custom button panel
-│   ├── SerialDevice/  — Serial COM port sender with simulation
-│   ├── Scale/         — Weighing scale simulator
-│   ├── RfidReader/    — RFID/NFC reader simulator
-│   ├── MagstripeReader/ — Card swipe simulator
-│   └── SequenceBuilder/ — Test sequence recorder/player
-├── ViewModels/        — MVVM ViewModels for all pages
-├── Views/             — Dashboard, Devices, Profiles, Logs, Settings
-├── Helpers/           — RelayCommand, AsyncRelayCommand, ViewModelBase
-└── Profiles/          — Default JSON profiles
+|-- DeviceMocker/
+|   |-- Core/
+|   |-- Devices/
+|   |-- Helpers/
+|   |-- Interfaces/
+|   |-- Models/
+|   |-- Services/
+|   |-- ViewModels/
+|   `-- Views/
+`-- Samples/
+    `-- PosHardwareTestApp/
 ```
 
----
+## Development Notes
 
-## Architecture
+- `DeviceMocker` is the main product.
+- `Samples/PosHardwareTestApp` is a companion integration client, not a separate platform product.
+- The current emulator host is intentionally scoped to supported receipt-printer and drawer development scenarios.
 
-**MVVM Pattern** — ViewModels handle logic, Views handle UI, Services handle I/O.
+## Release Builds
 
-**Device → Router → Channel** — Every device creates a `DeviceAction`, the `InputRouter` routes it to the correct `IOutputChannel`, and the channel sends it to the target.
+Release-ready Windows builds can be generated with:
 
-**Modular Design** — Adding a new device or output channel requires:
-1. Create a class implementing `IDeviceModule` or `IOutputChannel`
-2. Register it in `ServiceLocator`
-3. Create a ViewModel + View
-4. Add a DataTemplate in MainWindow
+```powershell
+dotnet publish DeviceMocker/DeviceMocker.csproj -c Release -r win-x64
+dotnet publish Samples/PosHardwareTestApp/PosHardwareTestApp.csproj -c Release -r win-x64
+```
 
----
-
-## Future Roadmap
-
-- Receipt Printer Tester (ESC/POS commands)
-- Cash Drawer Trigger
-- Gamepad / Controller Simulator
-- WebSocket Output Channel
-- MQTT Output Channel
-- Plugin System
-- Macro Recorder
-- Multi-device Simulation
-- Installer / Auto-update
-
----
-
-## Contributing
-
-Contributions are welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/my-feature`)
-3. Commit your changes (`git commit -m 'Add my feature'`)
-4. Push to the branch (`git push origin feature/my-feature`)
-5. Open a Pull Request
-
----
+This repository also includes packaged release output under `releases/` when generated locally.
 
 ## License
 
-This project is licensed under the **Apache License 2.0** — see the [LICENSE](LICENSE) file for details.
-
----
+Apache License 2.0. See [LICENSE](LICENSE).
 
 ## Author
 
-**x1n-Q** — [GitHub](https://github.com/x1n-Q)
-
----
-
-*DeviceMocker — Test your software without buying hardware.*
+Created by [x1n-Q](https://github.com/x1n-Q).

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -6,9 +6,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <AssemblyTitle>DeviceMocker</AssemblyTitle>
-    <Product>DeviceMocker</Product>
-    <Description>Windows toolkit for simulating device input and emulating POS printer and cash drawer workflows.</Description>
+    <AssemblyTitle>POS Hardware Test App</AssemblyTitle>
+    <Product>POS Hardware Test App</Product>
+    <Description>Companion Windows client for testing DeviceMocker ESC/POS printer and cash drawer development workflows.</Description>
     <Company>x1n-Q</Company>
     <Authors>x1n-Q</Authors>
     <Version>1.1.0</Version>

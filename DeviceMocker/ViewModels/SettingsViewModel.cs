@@ -19,6 +19,15 @@ namespace DeviceMocker.ViewModels
         private int _countdownSeconds = 3;
         private bool _logToFile;
         private int _maxLogEntries = 1000;
+        private bool _emulatorAutoStart;
+        private EmulatorTransportType _defaultEmulatorTransport = EmulatorTransportType.Tcp;
+        private string _defaultEmulatorSerialPort = string.Empty;
+        private int _defaultEmulatorBaudRate = 9600;
+        private string _defaultEmulatorTcpHost = "127.0.0.1";
+        private int _defaultEmulatorTcpPort = 9100;
+        private int _defaultEmulatorHttpPort = 8088;
+        private string _defaultEmulatorHttpRoute = "/emulator";
+        private EmulatorLogVerbosity _emulatorLogVerbosity = EmulatorLogVerbosity.ParsedAndRaw;
         private string _statusMessage = string.Empty;
         private bool _isError;
         private bool _isLoaded;
@@ -32,6 +41,15 @@ namespace DeviceMocker.ViewModels
         public int CountdownSeconds { get => _countdownSeconds; set { if (SetProperty(ref _countdownSeconds, value)) MarkDirty(); } }
         public bool LogToFile { get => _logToFile; set { if (SetProperty(ref _logToFile, value)) MarkDirty(); } }
         public int MaxLogEntries { get => _maxLogEntries; set { if (SetProperty(ref _maxLogEntries, value)) MarkDirty(); } }
+        public bool EmulatorAutoStart { get => _emulatorAutoStart; set { if (SetProperty(ref _emulatorAutoStart, value)) MarkDirty(); } }
+        public EmulatorTransportType DefaultEmulatorTransport { get => _defaultEmulatorTransport; set { if (SetProperty(ref _defaultEmulatorTransport, value)) MarkDirty(); } }
+        public string DefaultEmulatorSerialPort { get => _defaultEmulatorSerialPort; set { if (SetProperty(ref _defaultEmulatorSerialPort, value)) MarkDirty(); } }
+        public int DefaultEmulatorBaudRate { get => _defaultEmulatorBaudRate; set { if (SetProperty(ref _defaultEmulatorBaudRate, value)) MarkDirty(); } }
+        public string DefaultEmulatorTcpHost { get => _defaultEmulatorTcpHost; set { if (SetProperty(ref _defaultEmulatorTcpHost, value)) MarkDirty(); } }
+        public int DefaultEmulatorTcpPort { get => _defaultEmulatorTcpPort; set { if (SetProperty(ref _defaultEmulatorTcpPort, value)) MarkDirty(); } }
+        public int DefaultEmulatorHttpPort { get => _defaultEmulatorHttpPort; set { if (SetProperty(ref _defaultEmulatorHttpPort, value)) MarkDirty(); } }
+        public string DefaultEmulatorHttpRoute { get => _defaultEmulatorHttpRoute; set { if (SetProperty(ref _defaultEmulatorHttpRoute, value)) MarkDirty(); } }
+        public EmulatorLogVerbosity EmulatorLogVerbosity { get => _emulatorLogVerbosity; set { if (SetProperty(ref _emulatorLogVerbosity, value)) MarkDirty(); } }
 
         public string StatusMessage { get => _statusMessage; set => SetProperty(ref _statusMessage, value); }
         public bool IsError { get => _isError; set => SetProperty(ref _isError, value); }
@@ -39,6 +57,8 @@ namespace DeviceMocker.ViewModels
         public string[] SuffixOptions { get; } = { "None", "Enter", "Tab", "CR", "LF", "CRLF" };
         public string[] ThemeOptions { get; } = { "Dark", "Light" };
         public Array OutputChannelOptions { get; } = Enum.GetValues(typeof(OutputChannelType));
+        public Array EmulatorTransportOptions { get; } = Enum.GetValues(typeof(EmulatorTransportType));
+        public Array EmulatorLogVerbosityOptions { get; } = Enum.GetValues(typeof(EmulatorLogVerbosity));
 
         public ICommand SaveCommand { get; }
         public ICommand LoadCommand { get; }
@@ -79,6 +99,15 @@ namespace DeviceMocker.ViewModels
                 _countdownSeconds = settings.CountdownSeconds;
                 _logToFile = settings.LogToFile;
                 _maxLogEntries = settings.MaxLogEntries;
+                _emulatorAutoStart = settings.EmulatorAutoStart;
+                _defaultEmulatorTransport = settings.DefaultEmulatorTransport;
+                _defaultEmulatorSerialPort = settings.DefaultEmulatorSerialPort;
+                _defaultEmulatorBaudRate = settings.DefaultEmulatorBaudRate;
+                _defaultEmulatorTcpHost = settings.DefaultEmulatorTcpHost;
+                _defaultEmulatorTcpPort = settings.DefaultEmulatorTcpPort;
+                _defaultEmulatorHttpPort = settings.DefaultEmulatorHttpPort;
+                _defaultEmulatorHttpRoute = settings.DefaultEmulatorHttpRoute;
+                _emulatorLogVerbosity = settings.EmulatorLogVerbosity;
 
                 OnPropertyChanged(nameof(DefaultDelay));
                 OnPropertyChanged(nameof(DefaultSuffix));
@@ -87,6 +116,15 @@ namespace DeviceMocker.ViewModels
                 OnPropertyChanged(nameof(CountdownSeconds));
                 OnPropertyChanged(nameof(LogToFile));
                 OnPropertyChanged(nameof(MaxLogEntries));
+                OnPropertyChanged(nameof(EmulatorAutoStart));
+                OnPropertyChanged(nameof(DefaultEmulatorTransport));
+                OnPropertyChanged(nameof(DefaultEmulatorSerialPort));
+                OnPropertyChanged(nameof(DefaultEmulatorBaudRate));
+                OnPropertyChanged(nameof(DefaultEmulatorTcpHost));
+                OnPropertyChanged(nameof(DefaultEmulatorTcpPort));
+                OnPropertyChanged(nameof(DefaultEmulatorHttpPort));
+                OnPropertyChanged(nameof(DefaultEmulatorHttpRoute));
+                OnPropertyChanged(nameof(EmulatorLogVerbosity));
 
                 ApplyTheme(_theme);
                 _isLoaded = true;
@@ -106,7 +144,17 @@ namespace DeviceMocker.ViewModels
                     Theme = Theme,
                     CountdownSeconds = Math.Max(0, CountdownSeconds),
                     LogToFile = LogToFile,
-                    MaxLogEntries = Math.Max(1, MaxLogEntries)
+                    MaxLogEntries = Math.Max(1, MaxLogEntries),
+                    EmulatorAutoStart = EmulatorAutoStart,
+                    EmulatorAutoStartProfileId = ServiceLocator.Settings.Current.EmulatorAutoStartProfileId,
+                    DefaultEmulatorTransport = DefaultEmulatorTransport,
+                    DefaultEmulatorSerialPort = DefaultEmulatorSerialPort ?? string.Empty,
+                    DefaultEmulatorBaudRate = Math.Max(300, DefaultEmulatorBaudRate),
+                    DefaultEmulatorTcpHost = string.IsNullOrWhiteSpace(DefaultEmulatorTcpHost) ? "127.0.0.1" : DefaultEmulatorTcpHost.Trim(),
+                    DefaultEmulatorTcpPort = Math.Max(1, DefaultEmulatorTcpPort),
+                    DefaultEmulatorHttpPort = Math.Max(1, DefaultEmulatorHttpPort),
+                    DefaultEmulatorHttpRoute = string.IsNullOrWhiteSpace(DefaultEmulatorHttpRoute) ? "/emulator" : DefaultEmulatorHttpRoute.Trim(),
+                    EmulatorLogVerbosity = EmulatorLogVerbosity
                 };
                 await ServiceLocator.Settings.SaveAsync(settings);
                 ShowStatus("Settings saved.", false);
@@ -124,6 +172,15 @@ namespace DeviceMocker.ViewModels
             CountdownSeconds = d.CountdownSeconds;
             LogToFile = d.LogToFile;
             MaxLogEntries = d.MaxLogEntries;
+            EmulatorAutoStart = d.EmulatorAutoStart;
+            DefaultEmulatorTransport = d.DefaultEmulatorTransport;
+            DefaultEmulatorSerialPort = d.DefaultEmulatorSerialPort;
+            DefaultEmulatorBaudRate = d.DefaultEmulatorBaudRate;
+            DefaultEmulatorTcpHost = d.DefaultEmulatorTcpHost;
+            DefaultEmulatorTcpPort = d.DefaultEmulatorTcpPort;
+            DefaultEmulatorHttpPort = d.DefaultEmulatorHttpPort;
+            DefaultEmulatorHttpRoute = d.DefaultEmulatorHttpRoute;
+            EmulatorLogVerbosity = d.EmulatorLogVerbosity;
             ShowStatus("Defaults restored. Click Save to apply.", false);
         }
 

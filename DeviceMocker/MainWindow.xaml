@@ -11,7 +11,8 @@
         xmlns:rfid="clr-namespace:DeviceMocker.Devices.RfidReader"
         xmlns:mag="clr-namespace:DeviceMocker.Devices.MagstripeReader"
         xmlns:seq="clr-namespace:DeviceMocker.Devices.SequenceBuilder"
-        Title="DeviceMocker — Hardware Input Device Simulator"
+        xmlns:drawer="clr-namespace:DeviceMocker.Devices.CashDrawer"
+        Title="DeviceMocker - Hardware Development Toolkit"
         Width="1100" Height="720"
         MinWidth="900" MinHeight="600"
         WindowStartupLocation="CenterScreen"
@@ -24,6 +25,7 @@
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:DashboardViewModel}"><views:DashboardView/></DataTemplate>
         <DataTemplate DataType="{x:Type vm:DevicesViewModel}"><views:DevicesView/></DataTemplate>
+        <DataTemplate DataType="{x:Type vm:EmulatorsViewModel}"><views:EmulatorsView/></DataTemplate>
         <DataTemplate DataType="{x:Type vm:ProfilesViewModel}"><views:ProfilesView/></DataTemplate>
         <DataTemplate DataType="{x:Type vm:LogsViewModel}"><views:LogsView/></DataTemplate>
         <DataTemplate DataType="{x:Type vm:SettingsViewModel}"><views:SettingsView/></DataTemplate>
@@ -35,6 +37,7 @@
         <DataTemplate DataType="{x:Type rfid:RfidReaderViewModel}"><rfid:RfidReaderView/></DataTemplate>
         <DataTemplate DataType="{x:Type mag:MagstripeReaderViewModel}"><mag:MagstripeReaderView/></DataTemplate>
         <DataTemplate DataType="{x:Type seq:SequenceBuilderViewModel}"><seq:SequenceBuilderView/></DataTemplate>
+        <DataTemplate DataType="{x:Type drawer:CashDrawerViewModel}"><drawer:CashDrawerView/></DataTemplate>
     </Window.Resources>
 
     <Grid>
@@ -43,30 +46,236 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Sidebar Navigation -->
         <Border Grid.Column="0" Background="{StaticResource SecondaryBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
             <DockPanel>
+                <!-- Title Block -->
                 <StackPanel DockPanel.Dock="Top" Margin="16,20,16,24">
                     <TextBlock Text="DeviceMocker" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}"/>
-                    <TextBlock Text="Hardware Simulator" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0"/>
+                    <TextBlock Text="Hardware and POS Toolkit" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0"/>
                 </StackPanel>
+
+                <!-- Version Block -->
                 <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="0,0,0,14">
-                    <TextBlock Text="v1.0.1" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="v1.1.0" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center"/>
                     <TextBlock FontSize="10" HorizontalAlignment="Center" Margin="0,4,0,0">
                         <Run Text="by " Foreground="{StaticResource TextSecondaryBrush}"/>
                         <Run Text="x1n-Q" Foreground="{StaticResource AccentLightBrush}" FontWeight="SemiBold"/>
                     </TextBlock>
                 </StackPanel>
+
+                <!-- Nav Menu List -->
                 <StackPanel Margin="8,0">
-                    <TextBlock Text="NAVIGATION" FontSize="10" FontWeight="SemiBold" Foreground="{StaticResource TextSecondaryBrush}" Margin="12,0,0,8"/>
-                    <Button Content="Dashboard" Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="Dashboard"/>
-                    <Button Content="Devices" Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="Devices"/>
-                    <Button Content="Profiles" Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="Profiles"/>
-                    <Button Content="Logs" Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="Logs"/>
-                    <Button Content="Settings" Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="Settings"/>
+                    <TextBlock Text="NAVIGATION" FontSize="10" FontWeight="Bold" Foreground="{StaticResource TextSecondaryBrush}" Margin="12,0,0,8"/>
+                    
+                    <!-- Dashboard -->
+                    <Button Content="Dashboard" Command="{Binding NavigateCommand}" CommandParameter="Dashboard">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="6" Padding="14,10" Margin="4,2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="⛃" Width="20" FontSize="13" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
+                                                    <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="Background" Value="{StaticResource SurfaceBrush}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentPageTitle}" Value="Dashboard">
+                                        <Setter Property="Background" Value="{StaticResource ActiveNavBrush}"/>
+                                        <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                        <Setter Property="BorderThickness" Value="3,0,0,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <!-- Devices -->
+                    <Button Content="Devices" Command="{Binding NavigateCommand}" CommandParameter="Devices">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="6" Padding="14,10" Margin="4,2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="⌨" Width="20" FontSize="13" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
+                                                    <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="Background" Value="{StaticResource SurfaceBrush}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentPageTitle}" Value="Devices">
+                                        <Setter Property="Background" Value="{StaticResource ActiveNavBrush}"/>
+                                        <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                        <Setter Property="BorderThickness" Value="3,0,0,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <!-- Emulators -->
+                    <Button Content="Emulators" Command="{Binding NavigateCommand}" CommandParameter="Emulators">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="6" Padding="14,10" Margin="4,2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="🖥" Width="20" FontSize="13" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
+                                                    <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="Background" Value="{StaticResource SurfaceBrush}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentPageTitle}" Value="Emulators">
+                                        <Setter Property="Background" Value="{StaticResource ActiveNavBrush}"/>
+                                        <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                        <Setter Property="BorderThickness" Value="3,0,0,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <!-- Profiles -->
+                    <Button Content="Profiles" Command="{Binding NavigateCommand}" CommandParameter="Profiles">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="6" Padding="14,10" Margin="4,2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="📂" Width="20" FontSize="13" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
+                                                    <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="Background" Value="{StaticResource SurfaceBrush}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentPageTitle}" Value="Profiles">
+                                        <Setter Property="Background" Value="{StaticResource ActiveNavBrush}"/>
+                                        <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                        <Setter Property="BorderThickness" Value="3,0,0,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <!-- Logs -->
+                    <Button Content="Logs" Command="{Binding NavigateCommand}" CommandParameter="Logs">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="6" Padding="14,10" Margin="4,2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="📋" Width="20" FontSize="13" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
+                                                    <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="Background" Value="{StaticResource SurfaceBrush}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentPageTitle}" Value="Logs">
+                                        <Setter Property="Background" Value="{StaticResource ActiveNavBrush}"/>
+                                        <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                        <Setter Property="BorderThickness" Value="3,0,0,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <!-- Settings -->
+                    <Button Content="Settings" Command="{Binding NavigateCommand}" CommandParameter="Settings">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="6" Padding="14,10" Margin="4,2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="⚙" Width="20" FontSize="13" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
+                                                    <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="Background" Value="{StaticResource SurfaceBrush}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentPageTitle}" Value="Settings">
+                                        <Setter Property="Background" Value="{StaticResource ActiveNavBrush}"/>
+                                        <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}"/>
+                                        <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                        <Setter Property="BorderThickness" Value="3,0,0,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </StackPanel>
             </DockPanel>
         </Border>
 
+        <!-- Right Content Area -->
         <DockPanel Grid.Column="1">
             <Border DockPanel.Dock="Top" Background="{StaticResource PrimaryBrush}" Padding="24,16" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1">
                 <DockPanel>

@@ -73,6 +73,83 @@
             </StackPanel>
         </Border>
 
+        <Border Style="{StaticResource CardStyle}">
+            <StackPanel>
+                <TextBlock Text="EMULATOR HOST" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <CheckBox Content="Auto-start the emulator host when a saved emulator profile is configured"
+                          IsChecked="{Binding EmulatorAutoStart}"
+                          Style="{StaticResource ModernCheckBoxStyle}" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Default Emulator Transport" Style="{StaticResource FieldLabelStyle}"/>
+                <ComboBox ItemsSource="{Binding EmulatorTransportOptions}"
+                          SelectedItem="{Binding DefaultEmulatorTransport}"
+                          Style="{StaticResource ModernComboBoxStyle}" Margin="0,0,0,12"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Default Serial Port" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding DefaultEmulatorSerialPort, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource ModernTextBoxStyle}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Default Baud Rate" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding DefaultEmulatorBaudRate, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource ModernTextBoxStyle}"
+                                 PreviewTextInput="NumericOnly_PreviewTextInput"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Default TCP Bind Address" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding DefaultEmulatorTcpHost, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource ModernTextBoxStyle}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Default TCP Port" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding DefaultEmulatorTcpPort, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource ModernTextBoxStyle}"
+                                 PreviewTextInput="NumericOnly_PreviewTextInput"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Default HTTP Port" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding DefaultEmulatorHttpPort, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource ModernTextBoxStyle}"
+                                 PreviewTextInput="NumericOnly_PreviewTextInput"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Default HTTP Route" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding DefaultEmulatorHttpRoute, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource ModernTextBoxStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="Emulator Log Verbosity" Style="{StaticResource FieldLabelStyle}"/>
+                <ComboBox ItemsSource="{Binding EmulatorLogVerbosityOptions}"
+                          SelectedItem="{Binding EmulatorLogVerbosity}"
+                          Style="{StaticResource ModernComboBoxStyle}"/>
+            </StackPanel>
+        </Border>
+
         <!-- Appearance -->
         <Border Style="{StaticResource CardStyle}">
             <StackPanel>
