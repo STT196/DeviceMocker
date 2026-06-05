@@ -179,6 +179,10 @@ dotnet publish Samples/PosHardwareTestApp/PosHardwareTestApp.csproj -c Release -
 
 This repository also includes packaged release output under `releases/` when generated locally.
 
+## Marketplace Materials
+
+Marketplace copy for the current release is available in [docs/MARKETPLACE_DRAFT_v1.1.0.md](docs/MARKETPLACE_DRAFT_v1.1.0.md).
+
 ## License
 
 Apache License 2.0. See [LICENSE](LICENSE).
