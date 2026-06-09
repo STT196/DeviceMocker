@@ -39,3 +39,6 @@ Desktop.ini
 ## User-specific
 *.env
 *.local
+
+## Package Build Folders
+DeviceMocker.Package/
