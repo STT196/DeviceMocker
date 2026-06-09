@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StoreAssociation xmlns="http://schemas.microsoft.com/appx/2010/storeassociation">
+  <Publisher>CN=REPLACE_WITH_PARTNER_CENTER_PUBLISHER</Publisher>
+  <PublisherDisplayName>xinQ</PublisherDisplayName>
+  <DeveloperAccountType>Developer</DeveloperAccountType>
+  <GeneratePackage>true</GeneratePackage>
+</StoreAssociation>

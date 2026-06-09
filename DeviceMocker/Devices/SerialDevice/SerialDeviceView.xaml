@@ -12,20 +12,20 @@
         <StackPanel Grid.Column="0" Margin="0,0,16,0">
 
             <TextBlock Text="Serial Text Sender" FontSize="16" FontWeight="SemiBold"
-                       Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                       Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,4"/>
             <TextBlock Text="Send text data over a serial COM port" FontSize="12"
-                       Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,16"/>
+                       Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,16"/>
 
             <!-- Mode Toggle -->
             <Border Style="{StaticResource CardStyle}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <CheckBox IsChecked="{Binding IsSimulationMode}" VerticalAlignment="Center"
-                                  Foreground="{StaticResource TextPrimaryBrush}"/>
+                                  Foreground="{DynamicResource TextPrimaryBrush}"/>
                         <TextBlock Text="Simulation Mode" FontSize="13" FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextPrimaryBrush}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                   Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" Margin="8,0,0,0"/>
                         <TextBlock Text="(no hardware needed)" FontSize="11"
-                                   Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                   Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="8,0,0,0"/>
                     </StackPanel>
 
                     <!-- Simulated Device Selector (only in sim mode) -->
@@ -61,7 +61,7 @@
                 </Border.Style>
                 <StackPanel>
                     <TextBlock Text="Hardware Connection" FontSize="13" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,12"/>
+                               Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,12"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -100,7 +100,7 @@
                         <TextBlock Grid.Column="0" Text="Payload" Style="{StaticResource FieldLabelStyle}"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                             <TextBlock Text="Line Ending:" FontSize="11"
-                                       Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                       Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,6,0"/>
                             <ComboBox ItemsSource="{Binding LineEndingOptions}" SelectedItem="{Binding SelectedLineEnding}"
                                       Style="{StaticResource ModernComboBoxStyle}" Padding="8,4" FontSize="11" MinWidth="70"/>
                         </StackPanel>
@@ -128,7 +128,7 @@
                 </Border.Style>
                 <StackPanel>
                     <TextBlock Text="Quick Commands" FontSize="12" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,10"/>
+                               Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,10"/>
                     <WrapPanel>
                         <Button Content="READ" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,6,6" Padding="14,8" FontSize="12" FontFamily="Consolas"
                                 Command="{Binding PresetCommand}" CommandParameter="READ"/>
@@ -150,25 +150,25 @@
 
             <!-- Status -->
             <TextBlock Text="{Binding StatusMessage}" FontSize="12"
-                       Foreground="{StaticResource TextSecondaryBrush}" Margin="0,8,0,0" TextWrapping="Wrap"/>
+                       Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,8,0,0" TextWrapping="Wrap"/>
         </StackPanel>
 
         <!-- Right Panel: Terminal -->
         <Border Grid.Column="1" Background="#0D0D1A" CornerRadius="10" Padding="0" Margin="16,0,0,0"
-                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
             <DockPanel>
                 <!-- Terminal Header -->
                 <Border DockPanel.Dock="Top" Background="#161628" CornerRadius="10,10,0,0" Padding="14,10">
                     <DockPanel>
                         <TextBlock Text="Serial Terminal" FontSize="13" FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                                   Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
                         <Button DockPanel.Dock="Right" Content="Clear" HorizontalAlignment="Right"
                                 Command="{Binding ClearTerminalCommand}" Padding="10,4" FontSize="11" Cursor="Hand"
-                                Foreground="{StaticResource TextSecondaryBrush}">
+                                Foreground="{DynamicResource TextSecondaryBrush}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Border x:Name="b" Background="Transparent" CornerRadius="4" Padding="{TemplateBinding Padding}">
-                                        <ContentPresenter HorizontalAlignment="Center" TextBlock.Foreground="{StaticResource TextSecondaryBrush}"/>
+                                        <ContentPresenter HorizontalAlignment="Center" TextBlock.Foreground="{DynamicResource TextSecondaryBrush}"/>
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
@@ -186,19 +186,19 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontSize="10" Margin="0,0,14,0">
                             <Run Text="TX" Foreground="#4ADE80" FontWeight="Bold"/>
-                            <Run Text=" = Sent" Foreground="{StaticResource TextSecondaryBrush}"/>
+                            <Run Text=" = Sent" Foreground="{DynamicResource TextSecondaryBrush}"/>
                         </TextBlock>
                         <TextBlock FontSize="10" Margin="0,0,14,0">
                             <Run Text="RX" Foreground="#60A5FA" FontWeight="Bold"/>
-                            <Run Text=" = Received" Foreground="{StaticResource TextSecondaryBrush}"/>
+                            <Run Text=" = Received" Foreground="{DynamicResource TextSecondaryBrush}"/>
                         </TextBlock>
                         <TextBlock FontSize="10" Margin="0,0,14,0">
                             <Run Text="HEX" Foreground="#A78BFA" FontWeight="Bold"/>
-                            <Run Text=" = Hex bytes" Foreground="{StaticResource TextSecondaryBrush}"/>
+                            <Run Text=" = Hex bytes" Foreground="{DynamicResource TextSecondaryBrush}"/>
                         </TextBlock>
                         <TextBlock FontSize="10">
                             <Run Text="SYS" Foreground="#FBBF24" FontWeight="Bold"/>
-                            <Run Text=" = System" Foreground="{StaticResource TextSecondaryBrush}"/>
+                            <Run Text=" = System" Foreground="{DynamicResource TextSecondaryBrush}"/>
                         </TextBlock>
                     </StackPanel>
                 </Border>

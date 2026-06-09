@@ -11,6 +11,10 @@ DeviceMocker combines two workflows:
 [![.NET](https://img.shields.io/badge/.NET-8.0-512BD4.svg)](https://dotnet.microsoft.com/)
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D6.svg)]()
 
+<a href="https://get.microsoft.com/installer/download/9nsf1wxjg82g?referrer=appbadge" target="_self" >
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
+
 ## What This Project Is For
 
 DeviceMocker is built for:
@@ -100,6 +104,14 @@ Phase-1 emulator support is aimed at real development and integration testing, e
 
 ## Quick Start
 
+### Installation
+
+The easiest way to install DeviceMocker is directly from the Microsoft Store:
+
+<a href="https://get.microsoft.com/installer/download/9nsf1wxjg82g?referrer=appbadge" target="_self" >
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
+
 ### Requirements
 
 - Windows 10 or Windows 11
@@ -178,6 +190,44 @@ dotnet publish Samples/PosHardwareTestApp/PosHardwareTestApp.csproj -c Release -
 ```
 
 This repository also includes packaged release output under `releases/` when generated locally.
+
+### Build The Installer
+
+To generate a one-click Windows setup executable for `DeviceMocker` with the bundled POS Hardware Test App:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File installer/Build-Installer.ps1
+```
+
+The installer is written to `releases/` as `DeviceMocker-Setup-v<version>-win-x64.exe`.
+
+### Prepare An MSIX Package
+
+This repository includes `DeviceMocker.Package/` plus SDK-based MSIX scripts under `msix/`.
+
+Important notes:
+
+- publisher display metadata is set to `xinQ`
+- author metadata is set to `Daniel Depaor`
+- for Microsoft Store submission, rebuild with the exact publisher string from Partner Center
+
+To generate a signed local test MSIX package:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File msix/Build-MSIX.ps1 -SignPackage
+```
+
+To generate a Store-ready package with your real Partner Center publisher:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File msix/Build-MSIX.ps1 -Publisher "CN=YOUR-PARTNER-CENTER-PUBLISHER"
+```
+
+To install the locally signed MSIX package, run this from an elevated PowerShell window:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File msix/Install-MSIX.ps1
+```
 
 ## License
 

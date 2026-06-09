@@ -10,9 +10,9 @@
         <!-- LEFT: Scanner Controls -->
         <StackPanel Grid.Column="0" Margin="0,0,16,0">
             <TextBlock Text="Barcode / QR Scanner Simulator" FontSize="16" FontWeight="SemiBold"
-                       Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                       Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,4"/>
             <TextBlock Text="Simulate a real scanner — sends keystrokes to your app" FontSize="12"
-                       Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,20"/>
+                       Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,20"/>
 
             <!-- Payload Input -->
             <Border Style="{StaticResource CardStyle}" Margin="0,0,0,12">
@@ -20,13 +20,13 @@
                     <Grid Margin="0,0,0,8">
                         <TextBlock Text="Scan Payload" Style="{StaticResource FieldLabelStyle}" VerticalAlignment="Center"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBlock Text="Type:" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBlock Text="Type:" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
                             <ComboBox ItemsSource="{Binding BarcodeTypeOptions}" SelectedItem="{Binding SelectedBarcodeType}" Style="{StaticResource ModernComboBoxStyle}" Padding="10,6" FontSize="12" MinWidth="100"/>
                         </StackPanel>
                     </Grid>
                     <TextBox Text="{Binding Payload, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBoxStyle}" FontSize="18" FontFamily="Consolas" Padding="14,12"/>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <Button Content="Generate Random" Style="{StaticResource SecondaryButtonStyle}" Foreground="{StaticResource TextPrimaryBrush}" Command="{Binding GenerateRandomCommand}" Padding="14,8" FontSize="12"/>
+                        <Button Content="Generate Random" Style="{StaticResource SecondaryButtonStyle}" Foreground="{DynamicResource TextPrimaryBrush}" Command="{Binding GenerateRandomCommand}" Padding="14,8" FontSize="12"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -70,8 +70,8 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
                         <CheckBox IsChecked="{Binding IsBatchMode}" VerticalAlignment="Center"/>
-                        <TextBlock Text="Batch Scan Mode" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" VerticalAlignment="Center" Margin="8,0,0,0"/>
-                        <TextBlock Text="(fire multiple barcodes)" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                        <TextBlock Text="Batch Scan Mode" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                        <TextBlock Text="(fire multiple barcodes)" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="8,0,0,0"/>
                     </StackPanel>
                     <StackPanel>
                         <StackPanel.Style>
@@ -104,8 +104,8 @@
             </Border>
 
             <!-- Countdown + Status -->
-            <TextBlock Text="{Binding CountdownText}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource WarningBrush}" Margin="0,4,0,0"/>
-            <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,6,0,0" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding CountdownText}" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource WarningBrush}" Margin="0,4,0,0"/>
+            <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,6,0,0" TextWrapping="Wrap"/>
         </StackPanel>
 
         <!-- RIGHT: Barcode Library + History -->
@@ -124,16 +124,16 @@
                 </Border.Style>
                 <StackPanel>
                     <DockPanel Margin="0,0,0,8">
-                        <TextBlock Text="Scan History" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" VerticalAlignment="Center"/>
-                        <Button DockPanel.Dock="Right" Content="Clear" HorizontalAlignment="Right" Command="{Binding ClearHistoryCommand}" Padding="8,4" FontSize="11" Cursor="Hand" Foreground="{StaticResource TextSecondaryBrush}">
+                        <TextBlock Text="Scan History" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                        <Button DockPanel.Dock="Right" Content="Clear" HorizontalAlignment="Right" Command="{Binding ClearHistoryCommand}" Padding="8,4" FontSize="11" Cursor="Hand" Foreground="{DynamicResource TextSecondaryBrush}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Border x:Name="b" Background="Transparent" CornerRadius="4" Padding="{TemplateBinding Padding}">
-                                        <ContentPresenter HorizontalAlignment="Center" TextBlock.Foreground="{StaticResource TextSecondaryBrush}"/>
+                                        <ContentPresenter HorizontalAlignment="Center" TextBlock.Foreground="{DynamicResource TextSecondaryBrush}"/>
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="b" Property="Background" Value="{StaticResource SurfaceBrush}"/>
+                                            <Setter TargetName="b" Property="Background" Value="{DynamicResource SurfaceBrush}"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -147,11 +147,11 @@
                                     <Button.Template>
                                         <ControlTemplate TargetType="Button">
                                             <Border x:Name="b" Background="Transparent" CornerRadius="4" Padding="8,5">
-                                                <TextBlock Text="{Binding}" FontFamily="Consolas" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                <TextBlock Text="{Binding}" FontFamily="Consolas" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}"/>
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="b" Property="Background" Value="{StaticResource SurfaceBrush}"/>
+                                                    <Setter TargetName="b" Property="Background" Value="{DynamicResource SurfaceBrush}"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
@@ -167,8 +167,8 @@
             <Border Style="{StaticResource CardStyle}">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Margin="0,0,0,12">
-                        <TextBlock Text="Sample Barcodes" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}"/>
-                        <TextBlock Text="Click any barcode to scan it (3s countdown)" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+                        <TextBlock Text="Sample Barcodes" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Text="Click any barcode to scan it (3s countdown)" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,4,0,0"/>
                     </StackPanel>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <ItemsControl ItemsSource="{Binding SampleBarcodes}">
@@ -177,27 +177,27 @@
                                     <Button Cursor="Hand" Margin="0,0,0,6" Command="{Binding DataContext.ScanSampleCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}">
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
-                                                <Border x:Name="b" Background="{StaticResource SurfaceBrush}" CornerRadius="6" Padding="14,10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                                                <Border x:Name="b" Background="{DynamicResource SurfaceBrush}" CornerRadius="6" Padding="14,10" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="*"/>
                                                             <ColumnDefinition Width="Auto"/>
                                                         </Grid.ColumnDefinitions>
                                                         <StackPanel Grid.Column="0">
-                                                            <TextBlock Text="{Binding Label}" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}"/>
-                                                            <TextBlock Text="{Binding Value}" FontFamily="Consolas" FontSize="11" Foreground="{StaticResource AccentLightBrush}" Margin="0,4,0,0"/>
+                                                            <TextBlock Text="{Binding Label}" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                            <TextBlock Text="{Binding Value}" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource AccentLightBrush}" Margin="0,4,0,0"/>
                                                         </StackPanel>
-                                                        <Border Grid.Column="1" Background="{StaticResource PrimaryBrush}" CornerRadius="4" Padding="8,4" VerticalAlignment="Center" Margin="8,0,0,0">
-                                                            <TextBlock Text="{Binding Type}" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                        <Border Grid.Column="1" Background="{DynamicResource PrimaryBrush}" CornerRadius="4" Padding="8,4" VerticalAlignment="Center" Margin="8,0,0,0">
+                                                            <TextBlock Text="{Binding Type}" FontSize="10" Foreground="{DynamicResource TextSecondaryBrush}"/>
                                                         </Border>
                                                     </Grid>
                                                 </Border>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter TargetName="b" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                                        <Setter TargetName="b" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
                                                     </Trigger>
                                                     <Trigger Property="IsPressed" Value="True">
-                                                        <Setter TargetName="b" Property="Background" Value="{StaticResource AccentBrush}"/>
+                                                        <Setter TargetName="b" Property="Background" Value="{DynamicResource AccentBrush}"/>
                                                     </Trigger>
                                                 </ControlTemplate.Triggers>
                                             </ControlTemplate>

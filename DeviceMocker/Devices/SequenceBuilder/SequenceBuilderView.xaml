@@ -9,13 +9,13 @@
 
         <!-- Left: Add Steps -->
         <StackPanel Grid.Column="0" Margin="0,0,16,0">
-            <TextBlock Text="Test Sequence Builder" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
-            <TextBlock Text="Build and replay action sequences" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,20"/>
+            <TextBlock Text="Test Sequence Builder" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+            <TextBlock Text="Build and replay action sequences" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,20"/>
 
             <!-- Add Step -->
             <Border Style="{StaticResource CardStyle}" Margin="0,0,0,12">
                 <StackPanel>
-                    <TextBlock Text="Add Step" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,12"/>
+                    <TextBlock Text="Add Step" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,12"/>
                     <TextBlock Text="Payload" Style="{StaticResource FieldLabelStyle}"/>
                     <TextBox Text="{Binding NewPayload, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernTextBoxStyle}" FontFamily="Consolas" Margin="0,0,0,12"/>
                     <Grid Margin="0,0,0,12">
@@ -44,7 +44,7 @@
             <!-- Presets -->
             <Border Style="{StaticResource CardStyle}" Margin="0,0,0,12">
                 <StackPanel>
-                    <TextBlock Text="Load Preset" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,10"/>
+                    <TextBlock Text="Load Preset" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,10"/>
                     <WrapPanel>
                         <Button Content="POS Login" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding LoadPresetCommand}" CommandParameter="POS Login" Margin="0,0,8,8" Padding="14,8" FontSize="12"/>
                         <Button Content="Scan 3 Items" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding LoadPresetCommand}" CommandParameter="Scan 3 Items" Margin="0,0,8,8" Padding="14,8" FontSize="12"/>
@@ -60,35 +60,35 @@
                 <Button Content="Cancel" Style="{StaticResource DangerButtonStyle}" Command="{Binding CancelCommand}" Padding="18,12" FontSize="13"/>
             </StackPanel>
 
-            <TextBlock Text="{Binding CountdownText}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource WarningBrush}" Margin="0,4,0,0"/>
-            <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,6,0,0" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding CountdownText}" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource WarningBrush}" Margin="0,4,0,0"/>
+            <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,6,0,0" TextWrapping="Wrap"/>
         </StackPanel>
 
         <!-- Right: Steps List -->
         <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="16,0,0,0">
             <DockPanel>
-                <TextBlock DockPanel.Dock="Top" Text="{Binding Steps.Count, StringFormat='Sequence Steps ({0})'}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,14"/>
+                <TextBlock DockPanel.Dock="Top" Text="{Binding Steps.Count, StringFormat='Sequence Steps ({0})'}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,14"/>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemsSource="{Binding Steps}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="{StaticResource SurfaceBrush}" CornerRadius="6" Padding="14,10" Margin="0,0,0,6" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                                <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="6" Padding="14,10" Margin="0,0,0,6" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="32"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{Binding Order}" FontSize="16" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="0" Text="{Binding Order}" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource AccentLightBrush}" VerticalAlignment="Center"/>
                                         <StackPanel Grid.Column="1" Margin="4,0">
-                                            <TextBlock Text="{Binding Payload}" FontFamily="Consolas" FontSize="12" Foreground="{StaticResource TextPrimaryBrush}" TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Text="{Binding Payload}" FontFamily="Consolas" FontSize="12" Foreground="{DynamicResource TextPrimaryBrush}" TextTrimming="CharacterEllipsis"/>
                                             <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                                                <TextBlock Text="{Binding ActionType}" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,10,0"/>
-                                                <TextBlock Text="{Binding Suffix, StringFormat='Suffix: {0}'}" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,10,0"/>
-                                                <TextBlock Text="{Binding DelayAfterMs, StringFormat='Delay: {0}ms'}" FontSize="10" Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                <TextBlock Text="{Binding ActionType}" FontSize="10" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,10,0"/>
+                                                <TextBlock Text="{Binding Suffix, StringFormat='Suffix: {0}'}" FontSize="10" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,10,0"/>
+                                                <TextBlock Text="{Binding DelayAfterMs, StringFormat='Delay: {0}ms'}" FontSize="10" Foreground="{DynamicResource TextSecondaryBrush}"/>
                                             </StackPanel>
                                         </StackPanel>
-                                        <Button Grid.Column="2" Content="X" Foreground="{StaticResource ErrorBrush}" Background="Transparent" BorderThickness="0" Cursor="Hand" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"
+                                        <Button Grid.Column="2" Content="X" Foreground="{DynamicResource ErrorBrush}" Background="Transparent" BorderThickness="0" Cursor="Hand" FontSize="13" FontWeight="Bold" VerticalAlignment="Center"
                                                 Command="{Binding DataContext.RemoveStepCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}"/>
                                     </Grid>
                                 </Border>

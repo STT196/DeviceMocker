@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StackPanel>
         <TextBlock Text="Weighing Scale Simulator" FontSize="16" FontWeight="SemiBold"
-                   Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                   Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,4"/>
         <TextBlock Text="Simulate weight readings from a digital scale" FontSize="12"
-                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,20"/>
+                   Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,20"/>
 
         <!-- Weight Display -->
         <Border Style="{StaticResource CardStyle}" Padding="32" Margin="0,0,0,16">
             <StackPanel HorizontalAlignment="Center">
                 <TextBlock Text="{Binding Weight, StringFormat='{}{0:F2}'}" FontSize="56" FontWeight="Bold"
-                           FontFamily="Consolas" Foreground="{StaticResource AccentLightBrush}" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding Unit}" FontSize="22" Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                           FontFamily="Consolas" Foreground="{DynamicResource AccentLightBrush}" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Unit}" FontSize="22" Foreground="{DynamicResource TextSecondaryBrush}" HorizontalAlignment="Center" Margin="0,6,0,0"/>
             </StackPanel>
         </Border>
 
@@ -59,7 +59,7 @@
         <!-- Quick Weights -->
         <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
-                <TextBlock Text="Quick Weights" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,10"/>
+                <TextBlock Text="Quick Weights" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,10"/>
                 <WrapPanel>
                     <Button Content="0.5" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="18,10" FontSize="13" Command="{Binding PresetCommand}" CommandParameter="0.5"/>
                     <Button Content="1.0" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,8,8" Padding="18,10" FontSize="13" Command="{Binding PresetCommand}" CommandParameter="1.0"/>
@@ -82,7 +82,7 @@
             <Button Content="Cancel" Style="{StaticResource DangerButtonStyle}" Command="{Binding CancelCommand}" Padding="20,12" FontSize="14"/>
         </StackPanel>
 
-        <TextBlock Text="{Binding CountdownText}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource WarningBrush}" Margin="0,8,0,0"/>
-        <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,6,0,0" TextWrapping="Wrap"/>
+        <TextBlock Text="{Binding CountdownText}" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource WarningBrush}" Margin="0,8,0,0"/>
+        <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,6,0,0" TextWrapping="Wrap"/>
     </StackPanel>
 </UserControl>

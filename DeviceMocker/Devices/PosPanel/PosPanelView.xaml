@@ -4,16 +4,16 @@
 
     <StackPanel>
         <TextBlock Text="Custom Button Panel" FontSize="16" FontWeight="SemiBold"
-                   Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                   Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,4"/>
         <TextBlock Text="POS-style configurable button panel — click to send actions" FontSize="12"
-                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,16"/>
+                   Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,16"/>
 
         <!-- Countdown Toggle -->
         <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
             <CheckBox IsChecked="{Binding SendWithCountdown}" VerticalAlignment="Center"
-                      Foreground="{StaticResource TextPrimaryBrush}"/>
+                      Foreground="{DynamicResource TextPrimaryBrush}"/>
             <TextBlock Text="Send with 3-second countdown" FontSize="12"
-                       Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                       Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="8,0,0,0"/>
         </StackPanel>
 
         <!-- Button Grid -->
@@ -31,26 +31,26 @@
                                 CommandParameter="{Binding}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
-                                    <Border x:Name="border" Background="{StaticResource SurfaceBrush}"
+                                    <Border x:Name="border" Background="{DynamicResource SurfaceBrush}"
                                             CornerRadius="8" Padding="14,12"
-                                            BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                             <TextBlock Text="{Binding Label}" FontSize="14" FontWeight="SemiBold"
-                                                       Foreground="{StaticResource TextPrimaryBrush}" 
+                                                       Foreground="{DynamicResource TextPrimaryBrush}" 
                                                        HorizontalAlignment="Center" TextAlignment="Center"/>
                                             <TextBlock Text="{Binding Value}" FontSize="10" Opacity="0.7"
-                                                       Foreground="{StaticResource AccentLightBrush}" 
+                                                       Foreground="{DynamicResource AccentLightBrush}" 
                                                        HorizontalAlignment="Center" TextAlignment="Center"
                                                        Margin="0,4,0,0"/>
                                         </StackPanel>
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
-                                            <Setter TargetName="border" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                            <Setter TargetName="border" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
                                         </Trigger>
                                         <Trigger Property="IsPressed" Value="True">
-                                            <Setter TargetName="border" Property="Background" Value="{StaticResource AccentBrush}"/>
+                                            <Setter TargetName="border" Property="Background" Value="{DynamicResource AccentBrush}"/>
                                         </Trigger>
                                         <Trigger Property="IsEnabled" Value="False">
                                             <Setter TargetName="border" Property="Opacity" Value="0.4"/>
@@ -66,8 +66,8 @@
 
         <!-- Countdown and Status -->
         <TextBlock Text="{Binding CountdownText}" FontSize="18" FontWeight="Bold"
-                   Foreground="{StaticResource WarningBrush}" Margin="0,12,0,0"/>
+                   Foreground="{DynamicResource WarningBrush}" Margin="0,12,0,0"/>
         <TextBlock Text="{Binding StatusMessage}" FontSize="12"
-                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+                   Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,4,0,0"/>
     </StackPanel>
 </UserControl>

@@ -4,9 +4,9 @@
     <StackPanel MaxWidth="640" HorizontalAlignment="Left">
 
         <TextBlock Text="Application Settings" FontSize="18" FontWeight="SemiBold"
-                   Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+                   Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,4"/>
         <TextBlock Text="Configure default behavior and appearance for DeviceMocker."
-                   FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,20"/>
+                   FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,20"/>
 
         <!-- Output Defaults -->
         <Border Style="{StaticResource CardStyle}">
@@ -68,7 +68,7 @@
                           IsChecked="{Binding LogToFile}"
                           Style="{StaticResource ModernCheckBoxStyle}"/>
                 <TextBlock Text="When enabled, activity logs are also written to disk for later review."
-                           FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"
+                           FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"
                            Margin="28,4,0,0" TextWrapping="Wrap"/>
             </StackPanel>
         </Border>
@@ -158,7 +158,7 @@
                 <ComboBox ItemsSource="{Binding ThemeOptions}" SelectedItem="{Binding Theme}"
                           Style="{StaticResource ModernComboBoxStyle}"/>
                 <TextBlock Text="Theme changes apply immediately."
-                           FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,6,0,0"/>
+                           FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,6,0,0"/>
             </StackPanel>
         </Border>
 
@@ -179,10 +179,10 @@
                        FontSize="12" Margin="16,0,0,0">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
-                        <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsError}" Value="True">
-                                <Setter Property="Foreground" Value="{StaticResource ErrorBrush}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

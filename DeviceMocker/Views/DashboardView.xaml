@@ -33,11 +33,11 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <TextBlock Text="EMULATOR HOST" FontSize="10" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
-                        <TextBlock Text="POS Development Ready" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,6,0,0"/>
-                        <TextBlock Text="Printer and drawer workflows in one place" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0"/>
+                        <TextBlock Text="EMULATOR HOST" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource AccentLightBrush}"/>
+                        <TextBlock Text="POS Development Ready" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,6,0,0"/>
+                        <TextBlock Text="Printer and drawer workflows in one place" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,0"/>
                     </StackPanel>
-                    <TextBlock Grid.Column="1" Text="⚡" FontSize="28" Foreground="{StaticResource SuccessBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="⚡" FontSize="28" Foreground="{DynamicResource SuccessBrush}" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
             
@@ -48,14 +48,14 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <TextBlock Text="RECENT ACTIVITY" FontSize="10" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                        <TextBlock Text="RECENT ACTIVITY" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource AccentLightBrush}"/>
                         <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                            <TextBlock Text="{Binding RecentLogs.Count}" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}"/>
-                            <TextBlock Text=" Logged" FontSize="14" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Bottom" Margin="4,0,0,2"/>
+                            <TextBlock Text="{Binding RecentLogs.Count}" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                            <TextBlock Text=" Logged" FontSize="14" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Bottom" Margin="4,0,0,2"/>
                         </StackPanel>
-                        <TextBlock Text="Across local test runs" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0"/>
+                        <TextBlock Text="Across local test runs" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,0"/>
                     </StackPanel>
-                    <TextBlock Grid.Column="1" Text="📊" FontSize="28" Foreground="{StaticResource AccentLightBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="📊" FontSize="28" Foreground="{DynamicResource AccentLightBrush}" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
 
@@ -66,61 +66,61 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <TextBlock Text="DEVICE TOOLKIT" FontSize="10" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
-                        <TextBlock Text="9 Simulators" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,6,0,0"/>
-                        <TextBlock Text="Built for repeatable developer testing" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0"/>
+                        <TextBlock Text="DEVICE TOOLKIT" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource AccentLightBrush}"/>
+                        <TextBlock Text="9 Simulators" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,6,0,0"/>
+                        <TextBlock Text="Built for repeatable developer testing" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,0"/>
                     </StackPanel>
-                    <TextBlock Grid.Column="1" Text="🛠" FontSize="28" Foreground="{StaticResource WarningBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="🛠" FontSize="28" Foreground="{DynamicResource WarningBrush}" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
         </UniformGrid>
 
         <!-- Quick Actions Section -->
-        <TextBlock Text="Quick Access Tools" FontSize="15" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,12"/>
+        <TextBlock Text="Quick Access Tools" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,12"/>
         <UniformGrid Columns="4" Margin="0,0,0,22">
             <!-- Barcode Scanner -->
             <Button Style="{StaticResource DeviceButtonStyle}" Margin="0,0,8,0" Command="{Binding QuickActionCommand}" CommandParameter="scanner">
                 <StackPanel Margin="0,4">
-                    <TextBlock Text="🔍" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
-                    <TextBlock Text="Barcode / QR" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource TextPrimaryBrush}"/>
-                    <TextBlock Text="Virtual scanner wedge" FontSize="10" HorizontalAlignment="Center" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,3,0,0"/>
+                    <TextBlock Text="🔍" FontSize="26" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                    <TextBlock Text="Barcode / QR" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    <TextBlock Text="Virtual scanner wedge" FontSize="10" HorizontalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,3,0,0"/>
                 </StackPanel>
             </Button>
 
             <!-- Virtual Keyboard -->
             <Button Style="{StaticResource DeviceButtonStyle}" Margin="4,0" Command="{Binding QuickActionCommand}" CommandParameter="keyboard">
                 <StackPanel Margin="0,4">
-                    <TextBlock Text="⌨" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
-                    <TextBlock Text="Virtual Keyboard" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource TextPrimaryBrush}"/>
-                    <TextBlock Text="Keystroke simulation" FontSize="10" HorizontalAlignment="Center" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,3,0,0"/>
+                    <TextBlock Text="⌨" FontSize="26" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                    <TextBlock Text="Virtual Keyboard" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    <TextBlock Text="Keystroke simulation" FontSize="10" HorizontalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,3,0,0"/>
                 </StackPanel>
             </Button>
 
             <!-- Custom button panel -->
             <Button Style="{StaticResource DeviceButtonStyle}" Margin="4,0" Command="{Binding QuickActionCommand}" CommandParameter="panel">
                 <StackPanel Margin="0,4">
-                    <TextBlock Text="🎛" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
-                    <TextBlock Text="Button Panel" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource TextPrimaryBrush}"/>
-                    <TextBlock Text="POS keypad shortcut layout" FontSize="10" HorizontalAlignment="Center" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,3,0,0"/>
+                    <TextBlock Text="🎛" FontSize="26" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                    <TextBlock Text="Button Panel" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    <TextBlock Text="POS keypad shortcut layout" FontSize="10" HorizontalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,3,0,0"/>
                 </StackPanel>
             </Button>
 
             <!-- Serial COM Port -->
             <Button Style="{StaticResource DeviceButtonStyle}" Margin="8,0,0,0" Command="{Binding QuickActionCommand}" CommandParameter="serial">
                 <StackPanel Margin="0,4">
-                    <TextBlock Text="🔌" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,6"/>
-                    <TextBlock Text="Serial Port" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{StaticResource TextPrimaryBrush}"/>
-                    <TextBlock Text="Serial text &amp; HEX streams" FontSize="10" HorizontalAlignment="Center" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,3,0,0"/>
+                    <TextBlock Text="🔌" FontSize="26" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                    <TextBlock Text="Serial Port" FontSize="13" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    <TextBlock Text="Serial text &amp; HEX streams" FontSize="10" HorizontalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,3,0,0"/>
                 </StackPanel>
             </Button>
         </UniformGrid>
 
         <!-- Recent Logs Section -->
-        <TextBlock Text="Recent Session Logs" FontSize="15" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,12"/>
+        <TextBlock Text="Recent Session Logs" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,12"/>
         <Border Style="{StaticResource CardStyle}">
             <StackPanel>
                 <!-- Log Header -->
-                <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1" Padding="0,0,0,8" Margin="0,0,0,6">
+                <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Padding="0,0,0,8" Margin="0,0,0,6">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="110"/>
@@ -128,10 +128,10 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="80"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="TIMESTAMP" FontSize="10" FontWeight="Bold" Foreground="{StaticResource TextSecondaryBrush}"/>
-                        <TextBlock Grid.Column="1" Text="DEVICE EMULATOR" FontSize="10" FontWeight="Bold" Foreground="{StaticResource TextSecondaryBrush}"/>
-                        <TextBlock Grid.Column="2" Text="PAYLOAD SENT" FontSize="10" FontWeight="Bold" Foreground="{StaticResource TextSecondaryBrush}"/>
-                        <TextBlock Grid.Column="3" Text="STATUS" FontSize="10" FontWeight="Bold" Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Right"/>
+                        <TextBlock Grid.Column="0" Text="TIMESTAMP" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                        <TextBlock Grid.Column="1" Text="DEVICE EMULATOR" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                        <TextBlock Grid.Column="2" Text="PAYLOAD SENT" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                        <TextBlock Grid.Column="3" Text="STATUS" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource TextSecondaryBrush}" HorizontalAlignment="Right"/>
                     </Grid>
                 </Border>
 
@@ -139,7 +139,7 @@
                 <ItemsControl ItemsSource="{Binding RecentLogs}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1" Padding="0,10" Margin="0,0,0,2">
+                            <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Padding="0,10" Margin="0,0,0,2">
                                 <Grid VerticalAlignment="Center">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="110"/>
@@ -148,11 +148,11 @@
                                         <ColumnDefinition Width="80"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="0" Text="{Binding Timestamp, StringFormat='{}{0:HH:mm:ss.fff}'}"
-                                               Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" FontFamily="Consolas" VerticalAlignment="Center"/>
+                                               Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" FontFamily="Consolas" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Column="1" Text="{Binding DeviceName}"
-                                               Foreground="{StaticResource TextPrimaryBrush}" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                               Foreground="{DynamicResource TextPrimaryBrush}" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Column="2" Text="{Binding Payload}" 
-                                               Foreground="{StaticResource TextSecondaryBrush}" FontSize="11" FontFamily="Consolas"
+                                               Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11" FontFamily="Consolas"
                                                TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,12,0"/>
                                     <Border Grid.Column="3" HorizontalAlignment="Right" CornerRadius="4" Padding="8,3" VerticalAlignment="Center">
                                         <Border.Style>
@@ -172,11 +172,11 @@
                                             <TextBlock.Style>
                                                 <Style TargetType="TextBlock">
                                                     <Setter Property="Text" Value="SUCCESS"/>
-                                                    <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding Success}" Value="False">
                                                             <Setter Property="Text" Value="FAILED"/>
-                                                            <Setter Property="Foreground" Value="{StaticResource ErrorBrush}"/>
+                                                            <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
@@ -191,7 +191,7 @@
 
                 <!-- Empty list message -->
                 <TextBlock Text="No recent hardware events found. Start with a simulator or the POS emulator host." FontSize="12"
-                           Foreground="{StaticResource TextSecondaryBrush}"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
                            HorizontalAlignment="Center" Margin="0,16">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">

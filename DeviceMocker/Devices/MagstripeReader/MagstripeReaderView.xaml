@@ -8,8 +8,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Margin="0,0,16,0">
-            <TextBlock Text="Magstripe Card Reader Simulator" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
-            <TextBlock Text="Simulate card swipes with track data" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,16"/>
+            <TextBlock Text="Magstripe Card Reader Simulator" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+            <TextBlock Text="Simulate card swipes with track data" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,16"/>
 
             <Border Style="{StaticResource CardStyle}">
                 <StackPanel>
@@ -46,16 +46,16 @@
                 <Button Content="Cancel" Style="{StaticResource DangerButtonStyle}" Command="{Binding CancelCommand}" Padding="16,12" FontSize="13"/>
             </StackPanel>
 
-            <TextBlock Text="{Binding CountdownText}" FontSize="20" FontWeight="Bold" Foreground="{StaticResource WarningBrush}" Margin="0,12,0,0"/>
-            <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,8,0,0" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding CountdownText}" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource WarningBrush}" Margin="0,12,0,0"/>
+            <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,8,0,0" TextWrapping="Wrap"/>
         </StackPanel>
 
         <!-- Right: Sample Swipes -->
         <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="16,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top" Margin="0,0,0,12">
-                    <TextBlock Text="Sample Cards" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}"/>
-                    <TextBlock Text="Click to swipe (3s countdown)" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+                    <TextBlock Text="Sample Cards" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    <TextBlock Text="Click to swipe (3s countdown)" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,4,0,0"/>
                 </StackPanel>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemsSource="{Binding SampleSwipes}">
@@ -66,27 +66,27 @@
                                         CommandParameter="{Binding}">
                                     <Button.Template>
                                         <ControlTemplate TargetType="Button">
-                                            <Border x:Name="b" Background="{StaticResource SurfaceBrush}" CornerRadius="6" Padding="12,10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                                            <Border x:Name="b" Background="{DynamicResource SurfaceBrush}" CornerRadius="6" Padding="12,10" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="*"/>
                                                         <ColumnDefinition Width="Auto"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel>
-                                                        <TextBlock Text="{Binding Label}" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}"/>
-                                                        <TextBlock Text="{Binding TrackData}" FontFamily="Consolas" FontSize="10" Foreground="{StaticResource AccentLightBrush}" Margin="0,3,0,0" TextTrimming="CharacterEllipsis"/>
+                                                        <TextBlock Text="{Binding Label}" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                                        <TextBlock Text="{Binding TrackData}" FontFamily="Consolas" FontSize="10" Foreground="{DynamicResource AccentLightBrush}" Margin="0,3,0,0" TextTrimming="CharacterEllipsis"/>
                                                     </StackPanel>
-                                                    <Border Grid.Column="1" Background="{StaticResource PrimaryBrush}" CornerRadius="4" Padding="8,3" VerticalAlignment="Center">
-                                                        <TextBlock Text="{Binding CardType}" FontSize="9" Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                    <Border Grid.Column="1" Background="{DynamicResource PrimaryBrush}" CornerRadius="4" Padding="8,3" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding CardType}" FontSize="9" Foreground="{DynamicResource TextSecondaryBrush}"/>
                                                     </Border>
                                                 </Grid>
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="b" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                                    <Setter TargetName="b" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
                                                 </Trigger>
                                                 <Trigger Property="IsPressed" Value="True">
-                                                    <Setter TargetName="b" Property="Background" Value="{StaticResource AccentBrush}"/>
+                                                    <Setter TargetName="b" Property="Background" Value="{DynamicResource AccentBrush}"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>

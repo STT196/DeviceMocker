@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using DeviceMocker.Helpers;
 
@@ -29,6 +35,7 @@ namespace DeviceMocker.ViewModels
 
         public ICommand NavigateCommand { get; }
         public ICommand GoBackCommand { get; }
+        public ICommand LaunchHardwareTestCommand { get; }
 
         private ViewModelBase? _previousPage;
         private string? _previousPageTitle;
@@ -44,6 +51,7 @@ namespace DeviceMocker.ViewModels
 
             NavigateCommand = new RelayCommand(Navigate);
             GoBackCommand = new RelayCommand(GoBack, () => _previousPage != null);
+            LaunchHardwareTestCommand = new RelayCommand(LaunchHardwareTestApp);
 
             CurrentPage = DashboardVm;
         }
@@ -111,6 +119,57 @@ namespace DeviceMocker.ViewModels
                 _previousPage = null;
                 _previousPageTitle = null;
             }
+        }
+
+        private void LaunchHardwareTestApp()
+        {
+            try
+            {
+                var executablePath = ResolveHardwareTestExecutablePath();
+                if (string.IsNullOrWhiteSpace(executablePath) || !File.Exists(executablePath))
+                {
+                    MessageBox.Show(
+                        "POS Hardware Test App was not found.\n\nBuild or publish DeviceMocker with the bundled hardware test app, or build the sample project first.",
+                        "Hardware Test App Not Found",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    return;
+                }
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = executablePath,
+                    WorkingDirectory = Path.GetDirectoryName(executablePath) ?? AppDomain.CurrentDomain.BaseDirectory,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Unable to launch POS Hardware Test App.\n\n{ex.Message}",
+                    "Launch Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+
+        private static string? ResolveHardwareTestExecutablePath()
+        {
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var candidates = new List<string>
+            {
+                Path.Combine(baseDirectory, "PosHardwareTestApp.exe"),
+                Path.Combine(baseDirectory, "PosHardwareTestApp", "PosHardwareTestApp.exe"),
+                Path.Combine(baseDirectory, "Tools", "PosHardwareTestApp.exe"),
+                Path.Combine(baseDirectory, "Tools", "PosHardwareTestApp", "PosHardwareTestApp.exe"),
+                Path.Combine(baseDirectory, "..", "..", "..", "Samples", "PosHardwareTestApp", "bin", "Debug", "net8.0-windows", "PosHardwareTestApp.exe"),
+                Path.Combine(baseDirectory, "..", "..", "..", "Samples", "PosHardwareTestApp", "bin", "Release", "net8.0-windows", "PosHardwareTestApp.exe"),
+                Path.Combine(baseDirectory, "..", "..", "..", "Samples", "PosHardwareTestApp", "bin", "Release", "net8.0-windows", "win-x64", "publish", "PosHardwareTestApp.exe")
+            };
+
+            return candidates
+                .Select(Path.GetFullPath)
+                .FirstOrDefault(File.Exists);
         }
     }
 }

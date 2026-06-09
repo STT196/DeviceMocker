@@ -7,16 +7,16 @@
             <Button Content="Export CSV" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding ExportCsvCommand}" Margin="0,0,8,0"/>
             <Button Content="Export JSON" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding ExportJsonCommand}" Margin="0,0,8,0"/>
             <Button Content="Clear All" Style="{StaticResource DangerButtonStyle}" Command="{Binding ClearCommand}"/>
-            <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="16,0,0,0"/>
+            <TextBlock Text="{Binding StatusMessage}" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" Margin="16,0,0,0"/>
         </StackPanel>
         <Border Style="{StaticResource CardStyle}">
-            <ListView ItemsSource="{Binding Logs}" Background="Transparent" BorderThickness="0" Foreground="{StaticResource TextPrimaryBrush}" FontSize="12">
+            <ListView ItemsSource="{Binding Logs}" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource TextPrimaryBrush}" FontSize="12">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Time" Width="140">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}'}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                                    <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}'}" Foreground="{DynamicResource TextSecondaryBrush}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -25,7 +25,7 @@
                         <GridViewColumn Header="Payload" Width="220">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Payload}" TextTrimming="CharacterEllipsis" Foreground="{StaticResource TextPrimaryBrush}" MaxWidth="220"/>
+                                    <TextBlock Text="{Binding Payload}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource TextPrimaryBrush}" MaxWidth="220"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -36,11 +36,11 @@
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="Text" Value="OK"/>
-                                                <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Success}" Value="False">
                                                         <Setter Property="Text" Value="FAIL"/>
-                                                        <Setter Property="Foreground" Value="{StaticResource ErrorBrush}"/>
+                                                        <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -52,7 +52,7 @@
                         <GridViewColumn Header="Error" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding ErrorMessage}" TextTrimming="CharacterEllipsis" Foreground="{StaticResource ErrorBrush}" MaxWidth="200"/>
+                                    <TextBlock Text="{Binding ErrorMessage}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource ErrorBrush}" MaxWidth="200"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

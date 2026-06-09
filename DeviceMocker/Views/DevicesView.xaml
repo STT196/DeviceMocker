@@ -2,8 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StackPanel>
-        <TextBlock Text="Available Device Emulators" FontSize="16" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4"/>
-        <TextBlock Text="Select an input device below to open its dedicated hardware simulator" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,20"/>
+        <TextBlock Text="Available Device Emulators" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,4"/>
+        <TextBlock Text="Select an input device below to open its dedicated hardware simulator" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,20"/>
 
         <!-- Grid of Devices -->
         <UniformGrid Columns="4" Margin="0,0,0,8">
@@ -12,28 +12,54 @@
             <Button Margin="0,0,8,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="scanner">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="12" Padding="18"
-                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="150">
+                        <Border x:Name="bd" Background="{DynamicResource SurfaceBrush}" CornerRadius="16" Padding="18"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" MinHeight="165">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#080B1A" BlurRadius="12" ShadowDepth="2" Opacity="0.08" Direction="270"/>
+                            </Border.Effect>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Border Background="#1A7C3AED" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="KEYBOARD" FontSize="8" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                
+                                <!-- Header Row: Icon and Badge -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icon Container -->
+                                    <Border x:Name="iconBg" Grid.Column="0" Width="44" Height="44" CornerRadius="12" 
+                                            Background="{DynamicResource SecondaryBrush}" 
+                                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="🔍" FontSize="20" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
-                                </StackPanel>
-                                <TextBlock Grid.Row="0" Text="🔍" FontSize="26" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="1" Text="Barcode / QR" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,10,0,0"/>
-                                <TextBlock Grid.Row="2" Text="Simulate barcode scanner sweeps sending keystrokes directly to focused fields." FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14"/>
+                                    
+                                    <!-- Tag Badge -->
+                                    <Border Grid.Column="1" Background="#1A7C3AED" CornerRadius="10" Padding="8,4" VerticalAlignment="Center" Height="22">
+                                        <TextBlock Text="KEYBOARD" FontSize="8.5" FontWeight="Bold" Foreground="{DynamicResource AccentLightBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                
+                                <TextBlock Grid.Row="1" Text="Barcode / QR" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,12,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Simulate barcode scanner sweeps sending keystrokes directly to focused fields." FontSize="11.5" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14.5"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentLightBrush}"/>
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#7C3AED" BlurRadius="18" ShadowDepth="2" Opacity="0.15" Direction="270"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="iconBg" Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+                                <Setter TargetName="iconBg" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -44,28 +70,54 @@
             <Button Margin="4,0,4,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="virtual-keyboard">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="12" Padding="18"
-                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="150">
+                        <Border x:Name="bd" Background="{DynamicResource SurfaceBrush}" CornerRadius="16" Padding="18"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" MinHeight="165">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#080B1A" BlurRadius="12" ShadowDepth="2" Opacity="0.08" Direction="270"/>
+                            </Border.Effect>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Border Background="#1A7C3AED" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="KEYBOARD" FontSize="8" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                
+                                <!-- Header Row: Icon and Badge -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icon Container -->
+                                    <Border x:Name="iconBg" Grid.Column="0" Width="44" Height="44" CornerRadius="12" 
+                                            Background="{DynamicResource SecondaryBrush}" 
+                                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="⌨" FontSize="20" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
-                                </StackPanel>
-                                <TextBlock Grid.Row="0" Text="⌨" FontSize="26" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="1" Text="Virtual Keyboard" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,10,0,0"/>
-                                <TextBlock Grid.Row="2" Text="Simulate keys, text sequences, and function shortcuts with controllable delay." FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14"/>
+                                    
+                                    <!-- Tag Badge -->
+                                    <Border Grid.Column="1" Background="#1A7C3AED" CornerRadius="10" Padding="8,4" VerticalAlignment="Center" Height="22">
+                                        <TextBlock Text="KEYBOARD" FontSize="8.5" FontWeight="Bold" Foreground="{DynamicResource AccentLightBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                
+                                <TextBlock Grid.Row="1" Text="Virtual Keyboard" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,12,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Simulate keys, text sequences, and function shortcuts with controllable delay." FontSize="11.5" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14.5"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentLightBrush}"/>
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#7C3AED" BlurRadius="18" ShadowDepth="2" Opacity="0.15" Direction="270"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="iconBg" Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+                                <Setter TargetName="iconBg" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -76,28 +128,54 @@
             <Button Margin="4,0,4,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="custom-panel">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="12" Padding="18"
-                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="150">
+                        <Border x:Name="bd" Background="{DynamicResource SurfaceBrush}" CornerRadius="16" Padding="18"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" MinHeight="165">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#080B1A" BlurRadius="12" ShadowDepth="2" Opacity="0.08" Direction="270"/>
+                            </Border.Effect>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Border Background="#1A7C3AED" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="KEYBOARD" FontSize="8" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                
+                                <!-- Header Row: Icon and Badge -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icon Container -->
+                                    <Border x:Name="iconBg" Grid.Column="0" Width="44" Height="44" CornerRadius="12" 
+                                            Background="{DynamicResource SecondaryBrush}" 
+                                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="🎛" FontSize="20" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
-                                </StackPanel>
-                                <TextBlock Grid.Row="0" Text="🎛" FontSize="26" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="1" Text="Button Panel" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,10,0,0"/>
-                                <TextBlock Grid.Row="2" Text="Trigger custom keyboard layout inputs using customizable Quick POS panel grids." FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14"/>
+                                    
+                                    <!-- Tag Badge -->
+                                    <Border Grid.Column="1" Background="#1A7C3AED" CornerRadius="10" Padding="8,4" VerticalAlignment="Center" Height="22">
+                                        <TextBlock Text="KEYBOARD" FontSize="8.5" FontWeight="Bold" Foreground="{DynamicResource AccentLightBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                
+                                <TextBlock Grid.Row="1" Text="Button Panel" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,12,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Trigger custom keyboard layout inputs using customizable Quick POS panel grids." FontSize="11.5" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14.5"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentLightBrush}"/>
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#7C3AED" BlurRadius="18" ShadowDepth="2" Opacity="0.15" Direction="270"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="iconBg" Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+                                <Setter TargetName="iconBg" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -108,28 +186,54 @@
             <Button Margin="8,0,0,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="serial-device">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="12" Padding="18"
-                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="150">
+                        <Border x:Name="bd" Background="{DynamicResource SurfaceBrush}" CornerRadius="16" Padding="18"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" MinHeight="165">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#080B1A" BlurRadius="12" ShadowDepth="2" Opacity="0.08" Direction="270"/>
+                            </Border.Effect>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Border Background="#1A10B981" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="COM PORT" FontSize="8" FontWeight="Bold" Foreground="{StaticResource SuccessBrush}"/>
+                                
+                                <!-- Header Row: Icon and Badge -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icon Container -->
+                                    <Border x:Name="iconBg" Grid.Column="0" Width="44" Height="44" CornerRadius="12" 
+                                            Background="{DynamicResource SecondaryBrush}" 
+                                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="🔌" FontSize="20" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
-                                </StackPanel>
-                                <TextBlock Grid.Row="0" Text="🔌" FontSize="26" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="1" Text="Serial Port" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,10,0,0"/>
-                                <TextBlock Grid.Row="2" Text="Transmit raw string data and HEX logs directly to native virtual COM serial ports." FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14"/>
+                                    
+                                    <!-- Tag Badge -->
+                                    <Border Grid.Column="1" Background="#1A10B981" CornerRadius="10" Padding="8,4" VerticalAlignment="Center" Height="22">
+                                        <TextBlock Text="COM PORT" FontSize="8.5" FontWeight="Bold" Foreground="{DynamicResource SuccessBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                
+                                <TextBlock Grid.Row="1" Text="Serial Port" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,12,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Transmit raw string data and HEX logs directly to native virtual COM serial ports." FontSize="11.5" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14.5"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentLightBrush}"/>
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#10B981" BlurRadius="18" ShadowDepth="2" Opacity="0.15" Direction="270"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="iconBg" Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+                                <Setter TargetName="iconBg" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -140,28 +244,54 @@
             <Button Margin="0,0,8,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="scale">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="12" Padding="18"
-                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="150">
+                        <Border x:Name="bd" Background="{DynamicResource SurfaceBrush}" CornerRadius="16" Padding="18"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" MinHeight="165">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#080B1A" BlurRadius="12" ShadowDepth="2" Opacity="0.08" Direction="270"/>
+                            </Border.Effect>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Border Background="#1A10B981" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="COM PORT" FontSize="8" FontWeight="Bold" Foreground="{StaticResource SuccessBrush}"/>
+                                
+                                <!-- Header Row: Icon and Badge -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icon Container -->
+                                    <Border x:Name="iconBg" Grid.Column="0" Width="44" Height="44" CornerRadius="12" 
+                                            Background="{DynamicResource SecondaryBrush}" 
+                                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="⚖" FontSize="20" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
-                                </StackPanel>
-                                <TextBlock Grid.Row="0" Text="⚖" FontSize="26" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="1" Text="Weighing Scale" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,10,0,0"/>
-                                <TextBlock Grid.Row="2" Text="Simulate scale weigh triggers sending stable weight units to checking points." FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14"/>
+                                    
+                                    <!-- Tag Badge -->
+                                    <Border Grid.Column="1" Background="#1A10B981" CornerRadius="10" Padding="8,4" VerticalAlignment="Center" Height="22">
+                                        <TextBlock Text="COM PORT" FontSize="8.5" FontWeight="Bold" Foreground="{DynamicResource SuccessBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                
+                                <TextBlock Grid.Row="1" Text="Weighing Scale" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,12,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Simulate scale weigh triggers sending stable weight units to checking points." FontSize="11.5" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14.5"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentLightBrush}"/>
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#10B981" BlurRadius="18" ShadowDepth="2" Opacity="0.15" Direction="270"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="iconBg" Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+                                <Setter TargetName="iconBg" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -172,28 +302,54 @@
             <Button Margin="4,0,4,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="rfid-reader">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="12" Padding="18"
-                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="150">
+                        <Border x:Name="bd" Background="{DynamicResource SurfaceBrush}" CornerRadius="16" Padding="18"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" MinHeight="165">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#080B1A" BlurRadius="12" ShadowDepth="2" Opacity="0.08" Direction="270"/>
+                            </Border.Effect>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Border Background="#1A7C3AED" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="KEYBOARD" FontSize="8" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                
+                                <!-- Header Row: Icon and Badge -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icon Container -->
+                                    <Border x:Name="iconBg" Grid.Column="0" Width="44" Height="44" CornerRadius="12" 
+                                            Background="{DynamicResource SecondaryBrush}" 
+                                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="🏷" FontSize="20" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
-                                </StackPanel>
-                                <TextBlock Grid.Row="0" Text="🏷" FontSize="26" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="1" Text="RFID / NFC Reader" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,10,0,0"/>
-                                <TextBlock Grid.Row="2" Text="Trigger secure card chip tags and contactless code readings on tap events." FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14"/>
+                                    
+                                    <!-- Tag Badge -->
+                                    <Border Grid.Column="1" Background="#1A7C3AED" CornerRadius="10" Padding="8,4" VerticalAlignment="Center" Height="22">
+                                        <TextBlock Text="KEYBOARD" FontSize="8.5" FontWeight="Bold" Foreground="{DynamicResource AccentLightBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                
+                                <TextBlock Grid.Row="1" Text="RFID / NFC Reader" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,12,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Trigger secure card chip tags and contactless code readings on tap events." FontSize="11.5" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14.5"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentLightBrush}"/>
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#7C3AED" BlurRadius="18" ShadowDepth="2" Opacity="0.15" Direction="270"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="iconBg" Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+                                <Setter TargetName="iconBg" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -204,28 +360,54 @@
             <Button Margin="4,0,4,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="magstripe-reader">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="12" Padding="18"
-                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="150">
+                        <Border x:Name="bd" Background="{DynamicResource SurfaceBrush}" CornerRadius="16" Padding="18"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" MinHeight="165">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#080B1A" BlurRadius="12" ShadowDepth="2" Opacity="0.08" Direction="270"/>
+                            </Border.Effect>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Border Background="#1A7C3AED" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="KEYBOARD" FontSize="8" FontWeight="Bold" Foreground="{StaticResource AccentLightBrush}"/>
+                                
+                                <!-- Header Row: Icon and Badge -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icon Container -->
+                                    <Border x:Name="iconBg" Grid.Column="0" Width="44" Height="44" CornerRadius="12" 
+                                            Background="{DynamicResource SecondaryBrush}" 
+                                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="💳" FontSize="20" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
-                                </StackPanel>
-                                <TextBlock Grid.Row="0" Text="💳" FontSize="26" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="1" Text="Magstripe Reader" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,10,0,0"/>
-                                <TextBlock Grid.Row="2" Text="Emulate magnetic card swipe gestures by streaming complete multi-track card data." FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14"/>
+                                    
+                                    <!-- Tag Badge -->
+                                    <Border Grid.Column="1" Background="#1A7C3AED" CornerRadius="10" Padding="8,4" VerticalAlignment="Center" Height="22">
+                                        <TextBlock Text="KEYBOARD" FontSize="8.5" FontWeight="Bold" Foreground="{DynamicResource AccentLightBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                
+                                <TextBlock Grid.Row="1" Text="Magstripe Reader" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,12,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Emulate magnetic card swipe gestures by streaming complete multi-track card data." FontSize="11.5" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14.5"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentLightBrush}"/>
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#7C3AED" BlurRadius="18" ShadowDepth="2" Opacity="0.15" Direction="270"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="iconBg" Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+                                <Setter TargetName="iconBg" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -236,28 +418,54 @@
             <Button Margin="8,0,0,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="sequence-builder">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="12" Padding="18"
-                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="150">
+                        <Border x:Name="bd" Background="{DynamicResource SurfaceBrush}" CornerRadius="16" Padding="18"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" MinHeight="165">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#080B1A" BlurRadius="12" ShadowDepth="2" Opacity="0.08" Direction="270"/>
+                            </Border.Effect>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Border Background="#1AF59E0B" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="AUTOMATION" FontSize="8" FontWeight="Bold" Foreground="{StaticResource WarningBrush}"/>
+                                
+                                <!-- Header Row: Icon and Badge -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icon Container -->
+                                    <Border x:Name="iconBg" Grid.Column="0" Width="44" Height="44" CornerRadius="12" 
+                                            Background="{DynamicResource SecondaryBrush}" 
+                                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="⛓" FontSize="20" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
-                                </StackPanel>
-                                <TextBlock Grid.Row="0" Text="⛓" FontSize="26" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="1" Text="Sequence Builder" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,10,0,0"/>
-                                <TextBlock Grid.Row="2" Text="Compose custom sequential events with custom delay timers to replay complex logs." FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14"/>
+                                    
+                                    <!-- Tag Badge -->
+                                    <Border Grid.Column="1" Background="#1AF59E0B" CornerRadius="10" Padding="8,4" VerticalAlignment="Center" Height="22">
+                                        <TextBlock Text="AUTOMATION" FontSize="8.5" FontWeight="Bold" Foreground="{DynamicResource WarningBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                
+                                <TextBlock Grid.Row="1" Text="Sequence Builder" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,12,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Compose custom sequential events with custom delay timers to replay complex logs." FontSize="11.5" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14.5"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentLightBrush}"/>
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#F59E0B" BlurRadius="18" ShadowDepth="2" Opacity="0.15" Direction="270"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="iconBg" Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+                                <Setter TargetName="iconBg" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -268,28 +476,54 @@
             <Button Margin="0,0,8,12" Cursor="Hand" Command="{Binding OpenDeviceCommand}" CommandParameter="cash-drawer">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{StaticResource SurfaceBrush}" CornerRadius="12" Padding="18"
-                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" MinHeight="150">
+                        <Border x:Name="bd" Background="{DynamicResource SurfaceBrush}" CornerRadius="16" Padding="18"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" MinHeight="165">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#080B1A" BlurRadius="12" ShadowDepth="2" Opacity="0.08" Direction="270"/>
+                            </Border.Effect>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Border Background="#1AF59E0B" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="HARDWARE" FontSize="8" FontWeight="Bold" Foreground="{StaticResource WarningBrush}"/>
+                                
+                                <!-- Header Row: Icon and Badge -->
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icon Container -->
+                                    <Border x:Name="iconBg" Grid.Column="0" Width="44" Height="44" CornerRadius="12" 
+                                            Background="{DynamicResource SecondaryBrush}" 
+                                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="💵" FontSize="20" FontFamily="Segoe UI Emoji" Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
-                                </StackPanel>
-                                <TextBlock Grid.Row="0" Text="💵" FontSize="26" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Row="1" Text="Cash Drawer" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,10,0,0"/>
-                                <TextBlock Grid.Row="2" Text="Simulate status inputs and kick trigger feedback for cash drawer drawers." FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14"/>
+                                    
+                                    <!-- Tag Badge -->
+                                    <Border Grid.Column="1" Background="#1AF59E0B" CornerRadius="10" Padding="8,4" VerticalAlignment="Center" Height="22">
+                                        <TextBlock Text="HARDWARE" FontSize="8.5" FontWeight="Bold" Foreground="{DynamicResource WarningBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                
+                                <TextBlock Grid.Row="1" Text="Cash Drawer" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,12,0,0"/>
+                                <TextBlock Grid.Row="2" Text="Simulate status inputs and kick trigger feedback for cash drawer drawers." FontSize="11.5" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap" Margin="0,6,0,0" LineHeight="14.5"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentLightBrush}"/>
-                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                                <Setter TargetName="bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#F59E0B" BlurRadius="18" ShadowDepth="2" Opacity="0.15" Direction="270"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="iconBg" Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+                                <Setter TargetName="iconBg" Property="BorderBrush" Value="{DynamicResource AccentLightBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
